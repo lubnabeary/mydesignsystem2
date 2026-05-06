@@ -4,7 +4,7 @@
   text-align: left;
 }
 
-/* ── Page sections ─────────────────────────────────────────────────────────── */
+/* ── Page body ──────────────────────────────────────────────────────────────── */
 
 .bsc-body {
   display: flex;
@@ -13,33 +13,38 @@
   padding: 56px 0 96px;
 }
 
+/* ── Sections ───────────────────────────────────────────────────────────────── */
+
 .bsc-section {
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
 
-.bsc-section-header {
+.bsc-section-head {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  align-items: flex-start;
+  gap: 16px;
   padding-bottom: 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.bsc-section-eyebrow {
+.bsc-section-num {
+  flex-shrink: 0;
+  margin-top: 2px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.25);
+  font-family: ui-monospace, monospace;
 }
 
 .bsc-section-title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: #ffffff;
-  margin: 0;
+  margin: 0 0 4px;
 }
 
 .bsc-section-desc {
@@ -49,92 +54,48 @@
   line-height: 1.6;
 }
 
-/* ── Pattern groups ─────────────────────────────────────────────────────────── */
+/* ── Utility ────────────────────────────────────────────────────────────────── */
 
-.bsc-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.bsc-group-label {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.bsc-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-}
-
-.bsc-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* ── Token chips ──────────────────────────────────────────────────────────── */
-
-.bsc-tokens {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.bsc-token {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+.bsc-mono {
+  font-family: ui-monospace, monospace;
   font-size: 12px;
 }
 
-.bsc-token-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
+.bsc-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.bsc-token-name {
-  font-weight: 600;
-  color: #7eb5d7;
-  font-family: ui-monospace, monospace;
+.bsc-sublabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.3);
 }
 
-.bsc-token-value {
-  color: rgba(255, 255, 255, 0.4);
-  font-family: ui-monospace, monospace;
-}
-
-/* ── State demo ──────────────────────────────────────────────────────────── */
-
-.bsc-state-grid {
+.bsc-two-col {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* ── Figma Source ───────────────────────────────────────────────────────────── */
+
+.bsc-figma-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
-.bsc-state-card {
+.bsc-figma-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 20px 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
+  gap: 10px;
 }
 
-.bsc-state-label {
+.bsc-figma-label {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -142,7 +103,373 @@
   color: rgba(255, 255, 255, 0.35);
 }
 
-/* ── Props API table ─────────────────────────────────────────────────────── */
+.bsc-figma-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  border-radius: 12px;
+}
+
+.bsc-figma-spec {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bsc-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.bsc-spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+}
+
+.bsc-spec-key {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.bsc-spec-val {
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+  color: #7eb5d7;
+  white-space: nowrap;
+}
+
+/* ── Token grid ─────────────────────────────────────────────────────────────── */
+
+.bsc-token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.bsc-token-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+}
+
+.bsc-token-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.bsc-token-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.bsc-token-name {
+  color: #7eb5d7;
+  font-size: 11px;
+}
+
+.bsc-token-hex {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+}
+
+.bsc-token-desc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Type list ──────────────────────────────────────────────────────────────── */
+
+.bsc-type-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bsc-type-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+}
+
+.bsc-type-sample {
+  color: #ffffff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* ── Spec list ──────────────────────────────────────────────────────────────── */
+
+.bsc-spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bsc-spec-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+
+/* ── Variants ───────────────────────────────────────────────────────────────── */
+
+.bsc-variant-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bsc-variant-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.bsc-variant-demo {
+  flex-shrink: 0;
+  min-width: 180px;
+}
+
+.bsc-variant-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* ── Sizes ──────────────────────────────────────────────────────────────────── */
+
+.bsc-size-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bsc-size-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.bsc-size-preview {
+  min-width: 0;
+}
+
+.bsc-size-specs {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.bsc-size-badge {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #31bbe1;
+  background: rgba(49, 187, 225, 0.1);
+  border: 1px solid rgba(49, 187, 225, 0.2);
+  border-radius: 5px;
+  padding: 3px 8px;
+  font-family: ui-monospace, monospace;
+}
+
+.bsc-size-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: right;
+}
+
+/* ── States grid ────────────────────────────────────────────────────────────── */
+
+.bsc-states-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.bsc-state-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.bsc-state-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.bsc-state-sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: ui-monospace, monospace;
+}
+
+.bsc-state-demo {
+  margin-top: 6px;
+}
+
+/* ── Icons ──────────────────────────────────────────────────────────────────── */
+
+.bsc-icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Playground ─────────────────────────────────────────────────────────────── */
+
+.bsc-playground {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 24px;
+  align-items: start;
+}
+
+.bsc-play-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bsc-preview-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 32px;
+}
+
+.bsc-code {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+  margin: 0;
+}
+
+/* ── Controls ───────────────────────────────────────────────────────────────── */
+
+.bsc-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+.bsc-ctrl-head {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.3);
+  margin: 0 0 2px;
+}
+
+.bsc-ctrl {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bsc-ctrl label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bsc-ctrl select,
+.bsc-ctrl input[type='text'] {
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 13px;
+  outline: none;
+  appearance: auto;
+  transition: border-color 150ms ease;
+}
+
+.bsc-ctrl select:focus,
+.bsc-ctrl input[type='text']:focus {
+  border-color: rgba(49, 187, 225, 0.6);
+}
+
+.bsc-ctrl-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.bsc-ctrl-check input[type='checkbox'] {
+  accent-color: #31bbe1;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.bsc-ctrl-check span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Props API table ────────────────────────────────────────────────────────── */
 
 .bsc-table-wrap {
   overflow-x: auto;
@@ -193,146 +520,33 @@
   color: #7eb5d7;
 }
 
-.bsc-table .bsc-required {
-  color: #dc3a3a;
-  font-weight: 700;
-}
+/* ── Snippets ───────────────────────────────────────────────────────────────── */
 
-/* ── Playground ──────────────────────────────────────────────────────────── */
-
-.bsc-playground {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 24px;
-  align-items: start;
-}
-
-.bsc-playground-left {
+.bsc-snippets {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.bsc-preview {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 140px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
-  padding: 32px;
-}
-
-.bsc-code-block {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 16px 20px;
-  font-family: ui-monospace, monospace;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.7;
-  overflow-x: auto;
-  white-space: pre;
-}
-
-.bsc-code-block .token-keyword  { color: #7eb5d7; }
-.bsc-code-block .token-prop     { color: #ff7c2b; }
-.bsc-code-block .token-string   { color: #31bbe1; }
-.bsc-code-block .token-tag      { color: rgba(255,255,255,0.6); }
-
-.bsc-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-}
-
-.bsc-controls-title {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.35);
-  margin: 0 0 4px;
-}
-
-.bsc-control {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.bsc-control label {
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.bsc-control select,
-.bsc-control input[type='text'] {
-  padding: 7px 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  color: #ffffff;
-  font-family: 'Be Vietnam Pro', sans-serif;
-  font-size: 13px;
-  outline: none;
-  appearance: auto;
-  transition: border-color 150ms ease;
-}
-
-.bsc-control select:focus,
-.bsc-control input[type='text']:focus {
-  border-color: rgba(49, 187, 225, 0.6);
-}
-
-.bsc-control-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.bsc-control-row input[type='checkbox'] {
-  accent-color: #31bbe1;
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-}
-
-.bsc-control-row span {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.65);
-}
-
-/* ── Code snippets ────────────────────────────────────────────────────────── */
-
-.bsc-snippets {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
 .bsc-snippet {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .bsc-snippet-label {
   font-size: 13px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.5);
 }
 
-@media (max-width: 720px) {
-  .bsc-playground {
-    grid-template-columns: 1fr;
-  }
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 800px) {
+  .bsc-figma-grid        { grid-template-columns: 1fr; }
+  .bsc-two-col           { grid-template-columns: 1fr; }
+  .bsc-playground        { grid-template-columns: 1fr; }
+  .bsc-size-row          { grid-template-columns: 1fr; }
+  .bsc-size-specs        { justify-content: flex-start; }
+  .bsc-size-detail       { text-align: left; }
 }

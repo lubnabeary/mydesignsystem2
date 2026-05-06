@@ -4,10 +4,17 @@
 // ── Colors ─────────────────────────────────────────────────────────────────
 
 export const colors = {
+  // Brand button colors — extracted from Figma nodes 639:8591 / 639:8595
+  brand: {
+    salmon:       '#ff8e8e',  // Button default (Figma Frame 63)
+    salmonMuted:  '#f3c0c0',  // Button disabled / muted state (Figma Frame 64)
+    salmonActive: '#f95757',  // Button active / pressed (Figma Frame 65)
+    dark:         '#1b1828',  // Button text — very dark purple (Figma label color)
+  },
   state: {
-    destructive:      '#dc3a3a',
-    destructiveHover: '#e54040',
-    destructiveMuted: 'rgba(220, 58, 58, 0.15)',
+    destructive:      '#f95757',           // Re-mapped to Figma active state color
+    destructiveHover: '#ff6060',
+    destructiveMuted: 'rgba(249,87,87,0.15)',
   },
   background: {
     primary:      '#1a1229',  // Darkest – header, footer, base layer

@@ -2,123 +2,230 @@ import { useState } from 'react';
 import './ButtonShowcase.css';
 import { Button } from '../components/Button';
 import type { ButtonVariant, ButtonSize, ButtonShape } from '../components/Button';
+import { colors, typography, borderRadius, animation } from '../styles/design-tokens';
 
 // ── Inline SVG icons ───────────────────────────────────────────────────────
 
-const SearchIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-  </svg>
-);
-const ArrowRight = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12,5 19,12 12,19" />
-  </svg>
-);
-const XIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-  </svg>
-);
-const HeartIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-  </svg>
-);
-const PlusIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-  </svg>
-);
-const DownloadIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
-  </svg>
-);
-const TrashIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /><path d="M10 11v6M14 11v6" />
-  </svg>
-);
+const SearchIcon  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+const ArrowRight  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>;
+const XIcon       = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+const HeartIcon   = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>;
+const PlusIcon    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>;
+const SendIcon    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>;
+const TrashIcon   = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>;
 
-// ── Section wrapper ────────────────────────────────────────────────────────
+// ── Section shell ──────────────────────────────────────────────────────────
 
-function Section({ id, eyebrow, title, desc, children }: {
-  id: string; eyebrow: string; title: string; desc: string; children: React.ReactNode;
+function Section({ id, num, title, desc, children }: {
+  id: string; num: string; title: string; desc: string; children: React.ReactNode;
 }) {
   return (
     <section id={id} className="bsc-section">
-      <div className="bsc-section-header">
-        <span className="bsc-section-eyebrow">{eyebrow}</span>
-        <h2 className="bsc-section-title">{title}</h2>
-        <p className="bsc-section-desc">{desc}</p>
+      <div className="bsc-section-head">
+        <span className="bsc-section-num">{num}</span>
+        <div>
+          <h2 className="bsc-section-title">{title}</h2>
+          <p className="bsc-section-desc">{desc}</p>
+        </div>
       </div>
       {children}
     </section>
   );
 }
 
-// ── 01 Design Token Usage ──────────────────────────────────────────────────
+// ── 01 — Figma Source ──────────────────────────────────────────────────────
 
-function TokenUsage() {
-  const tokens = [
-    { name: 'colors.accent.teal',             value: 'rgba(49,187,225,0.69)', dot: '#31bbe1' },
-    { name: 'colors.accent.blue',             value: '#7eb5d7',               dot: '#7eb5d7' },
-    { name: 'colors.state.destructive',       value: '#dc3a3a',               dot: '#dc3a3a' },
-    { name: 'colors.text.primary',            value: '#ffffff',               dot: '#ffffff' },
-    { name: 'borderRadius.button',            value: '37px',                  dot: '#31bbe1' },
-    { name: 'borderRadius.pill',              value: '58px',                  dot: '#31bbe1' },
-    { name: 'shadows.card',                   value: '0px 3px 8px …',        dot: '#80438b' },
-    { name: 'shadows.nav',                    value: '0px 5px 12px …',       dot: '#80438b' },
-    { name: 'typography.fontFamily.primary',  value: 'Be Vietnam Pro',        dot: '#7eb5d7' },
-    { name: 'typography.fontWeight.bold',     value: '700',                   dot: '#ff7c2b' },
-    { name: 'animation.duration.base',        value: '150ms',                 dot: '#2ab0fe' },
-    { name: 'animation.easing.default',       value: 'cubic-bezier(…)',       dot: '#2ab0fe' },
+function FigmaSource() {
+  const states = [
+    { label: 'Frame 63 — Default',         bg: colors.brand.salmon,       text: colors.brand.dark, name: 'colors.brand.salmon' },
+    { label: 'Frame 64 — Muted / Disabled', bg: colors.brand.salmonMuted,  text: colors.brand.dark, name: 'colors.brand.salmonMuted' },
+    { label: 'Frame 65 — Active / Pressed', bg: colors.brand.salmonActive, text: '#ffffff',          name: 'colors.brand.salmonActive' },
   ];
 
   return (
-    <Section id="tokens" eyebrow="01 — Design Tokens" title="Token Usage"
-      desc="Every visual property of the Button component maps to a named token in design-tokens.ts.">
-      <div className="bsc-tokens">
-        {tokens.map(t => (
-          <div key={t.name} className="bsc-token">
-            <span className="bsc-token-dot" style={{ background: t.dot, border: t.dot === '#ffffff' ? '1px solid rgba(255,255,255,0.2)' : undefined }} />
-            <span className="bsc-token-name">{t.name}</span>
-            <span className="bsc-token-value">{t.value}</span>
+    <Section id="figma" num="01" title="Figma Source"
+      desc="Three component states extracted from D3C-FINAL nodes 639:8591 (Post Story) and 639:8595 (Submit Anonymously).">
+      <div className="bsc-figma-grid">
+        {states.map(s => (
+          <div key={s.label} className="bsc-figma-card">
+            <div className="bsc-figma-label">{s.label}</div>
+            <div className="bsc-figma-preview" style={{ background: s.bg, border: '1px solid rgba(255,255,255,0.5)', borderRadius: 12 }}>
+              <span style={{ fontFamily: "'Be Vietnam Pro', sans-serif", fontWeight: 800, fontSize: 16, color: s.text }}>
+                Post Story
+              </span>
+            </div>
+            <div className="bsc-figma-spec">
+              <span className="bsc-mono">{s.name}</span>
+              <span className="bsc-mono" style={{ color: 'rgba(255,255,255,0.35)' }}>{s.bg}</span>
+            </div>
           </div>
         ))}
+      </div>
+
+      <div className="bsc-spec-grid">
+        <div className="bsc-spec-item"><span className="bsc-spec-key">Height (canvas)</span><span className="bsc-spec-val">131 px</span></div>
+        <div className="bsc-spec-item"><span className="bsc-spec-key">Border-radius (canvas)</span><span className="bsc-spec-val">60 px</span></div>
+        <div className="bsc-spec-item"><span className="bsc-spec-key">Font</span><span className="bsc-spec-val">Be Vietnam Pro ExtraBold</span></div>
+        <div className="bsc-spec-item"><span className="bsc-spec-key">Font size (canvas)</span><span className="bsc-spec-val">40 px</span></div>
+        <div className="bsc-spec-item"><span className="bsc-spec-key">Text color</span><span className="bsc-spec-val">#1b1828</span></div>
+        <div className="bsc-spec-item"><span className="bsc-spec-key">Border</span><span className="bsc-spec-val">1 px solid white</span></div>
+        <div className="bsc-spec-item"><span className="bsc-spec-key">Canvas width</span><span className="bsc-spec-val">1880 px</span></div>
+        <div className="bsc-spec-item"><span className="bsc-spec-key">Scale factor → 1280 px</span><span className="bsc-spec-val">×0.681</span></div>
       </div>
     </Section>
   );
 }
 
-// ── 02 Variants ────────────────────────────────────────────────────────────
+// ── 02 — Design Tokens ─────────────────────────────────────────────────────
 
-function VariantsSection() {
-  const variants: { v: ButtonVariant; label: string; note: string }[] = [
-    { v: 'primary',     label: 'Primary',     note: 'Teal fill — main CTA' },
-    { v: 'secondary',   label: 'Secondary',   note: 'Outlined — secondary action' },
-    { v: 'ghost',       label: 'Ghost',       note: 'Transparent — tertiary' },
-    { v: 'destructive', label: 'Destructive', note: 'Red fill — irreversible action' },
-    { v: 'link',        label: 'Link',        note: 'Text only — inline action' },
+function TokenPreview() {
+  const colorTokens = [
+    { token: 'colors.brand.salmon',       value: colors.brand.salmon,       label: 'Primary default' },
+    { token: 'colors.brand.salmonMuted',  value: colors.brand.salmonMuted,  label: 'Disabled state' },
+    { token: 'colors.brand.salmonActive', value: colors.brand.salmonActive, label: 'Active / destructive' },
+    { token: 'colors.brand.dark',         value: colors.brand.dark,         label: 'Primary text' },
+    { token: 'colors.accent.teal',        value: '#31bbe1',                  label: 'Secondary variant' },
+    { token: 'colors.accent.blue',        value: '#7eb5d7',                  label: 'Link variant' },
+    { token: 'colors.text.primary',       value: '#ffffff',                  label: 'Ghost / secondary text' },
+  ];
+
+  const typeTokens = [
+    { token: 'typography.fontFamily.primary', value: typography.fontFamily.primary },
+    { token: 'typography.fontWeight.extraBold', value: '800' },
+    { token: 'typography.fontWeight.bold', value: '700' },
+    { token: 'typography.fontWeight.semiBold', value: '600' },
+  ];
+
+  const spacingTokens = [
+    { token: 'sm — px 18, gap 6',   desc: '40 px height' },
+    { token: 'md — px 28, gap 8',   desc: '52 px height (default)' },
+    { token: 'lg — px 36, gap 10',  desc: '64 px height' },
+    { token: 'xl — px 48, gap 12',  desc: '88 px height (Figma native)' },
+  ];
+
+  const radiusTokens = [
+    { token: 'sm radius', value: '20px' },
+    { token: 'md radius', value: '26px' },
+    { token: 'lg radius', value: '32px' },
+    { token: 'xl radius', value: '44px' },
+    { token: 'pill', value: '9999px' },
+    { token: 'square', value: '6px' },
+  ];
+
+  const animTokens = [
+    { token: 'animation.duration.base',    value: animation.duration.base,    label: 'bg / border / shadow' },
+    { token: 'animation.duration.fast',    value: animation.duration.fast,    label: 'transform (lift)' },
+    { token: 'animation.duration.spinner', value: animation.duration.spinner, label: 'loading rotation' },
+    { token: 'animation.easing.default',   value: animation.easing.default,   label: 'all transitions' },
   ];
 
   return (
-    <Section id="variants" eyebrow="02 — Variants" title="All Variants"
-      desc="Five variants cover every intent level from primary CTA to inline navigation.">
-      <div className="bsc-group">
-        <div className="bsc-row">
-          {variants.map(({ v, label }) => (
-            <Button key={v} variant={v}>{label}</Button>
+    <Section id="tokens" num="02" title="Design Tokens Used"
+      desc="Every value in this component is derived from a named token in src/styles/design-tokens.ts.">
+
+      <div className="bsc-subsection">
+        <span className="bsc-sublabel">Color tokens</span>
+        <div className="bsc-token-grid">
+          {colorTokens.map(t => (
+            <div key={t.token} className="bsc-token-card">
+              <div className="bsc-token-swatch" style={{
+                background: t.value,
+                border: t.value === '#ffffff' || t.value === colors.brand.dark ? '1px solid rgba(255,255,255,0.2)' : 'none',
+              }} />
+              <div className="bsc-token-info">
+                <span className="bsc-mono bsc-token-name">{t.token}</span>
+                <span className="bsc-mono bsc-token-hex">{t.value}</span>
+                <span className="bsc-token-desc">{t.label}</span>
+              </div>
+            </div>
           ))}
         </div>
-        {/* Side-by-side with notes */}
-        {variants.map(({ v, label, note }) => (
-          <div key={v} className="bsc-group" style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
-            <div style={{ width: 160 }}>
-              <Button variant={v}>{label}</Button>
+      </div>
+
+      <div className="bsc-subsection">
+        <span className="bsc-sublabel">Typography tokens</span>
+        <div className="bsc-type-list">
+          {typeTokens.map(t => (
+            <div key={t.token} className="bsc-type-row">
+              <span className="bsc-mono bsc-token-name">{t.token}</span>
+              <span className="bsc-type-sample" style={{
+                fontFamily: t.token.includes('Family') ? typography.fontFamily.primary : undefined,
+                fontWeight: t.value === '800' ? 800 : t.value === '700' ? 700 : 600,
+              }}>
+                {t.value === '800' ? 'ExtraBold 800 — Post Story'
+                 : t.value === '700' ? 'Bold 700 — Explore'
+                 : t.value === '600' ? 'SemiBold 600 — CONTACT'
+                 : t.value}
+              </span>
             </div>
-            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{note}</span>
+          ))}
+        </div>
+      </div>
+
+      <div className="bsc-two-col">
+        <div className="bsc-subsection">
+          <span className="bsc-sublabel">Spacing per size</span>
+          <div className="bsc-spec-list">
+            {spacingTokens.map(t => (
+              <div key={t.token} className="bsc-spec-row">
+                <span className="bsc-mono" style={{ color: '#7eb5d7' }}>{t.token}</span>
+                <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12 }}>{t.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bsc-subsection">
+          <span className="bsc-sublabel">Border radius per size</span>
+          <div className="bsc-spec-list">
+            {radiusTokens.map(t => (
+              <div key={t.token} className="bsc-spec-row">
+                <span className="bsc-mono" style={{ color: '#7eb5d7' }}>{t.token}</span>
+                <span className="bsc-mono" style={{ color: 'rgba(255,255,255,0.4)' }}>{t.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="bsc-subsection">
+        <span className="bsc-sublabel">Animation tokens</span>
+        <div className="bsc-spec-list">
+          {animTokens.map(t => (
+            <div key={t.token} className="bsc-spec-row">
+              <span className="bsc-mono" style={{ color: '#7eb5d7' }}>{t.token}</span>
+              <span className="bsc-mono" style={{ color: 'rgba(255,255,255,0.55)' }}>{t.value}</span>
+              <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12 }}>{t.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+// ── 03 — Variants ──────────────────────────────────────────────────────────
+
+function VariantsSection() {
+  return (
+    <Section id="variants" num="03" title="All Variants"
+      desc="Primary is the direct Figma button. Secondary uses the teal Explore color. Destructive uses the Figma active state red.">
+      <div className="bsc-variant-grid">
+        {([
+          { v: 'primary',     label: 'Post Story',          note: 'Figma native — #ff8e8e salmon' },
+          { v: 'secondary',   label: 'Explore',             note: 'Teal fill from homepage cards' },
+          { v: 'ghost',       label: 'Skip',                note: 'Transparent + white border' },
+          { v: 'destructive', label: 'Delete Entry',        note: 'Figma Frame 65 — #f95757' },
+          { v: 'link',        label: 'View all resources →', note: 'Text only, inline actions' },
+        ] as { v: ButtonVariant; label: string; note: string }[]).map(({ v, label, note }) => (
+          <div key={v} className="bsc-variant-row">
+            <div className="bsc-variant-demo">
+              <Button variant={v} size="md">{label}</Button>
+            </div>
+            <div className="bsc-variant-meta">
+              <span className="bsc-mono bsc-token-name">variant="{v}"</span>
+              <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>{note}</span>
+            </div>
           </div>
         ))}
       </div>
@@ -126,26 +233,30 @@ function VariantsSection() {
   );
 }
 
-// ── 03 Sizes ───────────────────────────────────────────────────────────────
+// ── 04 — Sizes ─────────────────────────────────────────────────────────────
 
 function SizesSection() {
-  const sizes: { s: ButtonSize; label: string; spec: string }[] = [
-    { s: 'sm', label: 'Small',      spec: '32 px · 13 px font · px 12' },
-    { s: 'md', label: 'Medium',     spec: '40 px · 15 px font · px 20  (default)' },
-    { s: 'lg', label: 'Large',      spec: '48 px · 17 px font · px 24' },
-    { s: 'xl', label: 'XLarge',     spec: '58 px · 20 px font · px 32  (Figma Explore)' },
-  ];
-
   return (
-    <Section id="sizes" eyebrow="03 — Sizes" title="Size Scale"
-      desc="Four tiers scaled from the Figma Explore button (XL = exact Figma height of 58 px).">
-      <div className="bsc-group">
-        {sizes.map(({ s, label, spec }) => (
-          <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-            <div style={{ width: 140 }}>
-              <Button size={s}>{label}</Button>
+    <Section id="sizes" num="04" title="Size Scale"
+      desc="Scaled from the 131 px Figma canvas height. XL is the closest match to the Figma native button.">
+      <div className="bsc-size-list">
+        {([
+          { s: 'sm' as ButtonSize, h: '40px', r: '20px', fs: '14px', px: '18px', note: 'Compact — inline forms' },
+          { s: 'md' as ButtonSize, h: '52px', r: '26px', fs: '17px', px: '28px', note: 'Default — general purpose' },
+          { s: 'lg' as ButtonSize, h: '64px', r: '32px', fs: '20px', px: '36px', note: 'Prominent — section CTAs' },
+          { s: 'xl' as ButtonSize, h: '88px', r: '44px', fs: '28px', px: '48px', note: 'Figma native — hero / form submit' },
+        ]).map(({ s, h, r, fs, px, note }) => (
+          <div key={s} className="bsc-size-row">
+            <div className="bsc-size-preview">
+              <Button size={s} fullWidth>Post Story</Button>
             </div>
-            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', fontFamily: 'ui-monospace, monospace' }}>{spec}</span>
+            <div className="bsc-size-specs">
+              <div className="bsc-size-badge">{s}</div>
+              <div className="bsc-size-detail">
+                <span className="bsc-mono">h:{h} · r:{r} · fs:{fs} · px:{px}</span>
+                <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12 }}>{note}</span>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -153,262 +264,200 @@ function SizesSection() {
   );
 }
 
-// ── 04 Shapes ──────────────────────────────────────────────────────────────
-
-function ShapesSection() {
-  const shapes: { sh: ButtonShape; label: string; token: string }[] = [
-    { sh: 'rounded', label: 'Rounded', token: 'borderRadius.button → 37px' },
-    { sh: 'pill',    label: 'Pill',    token: 'borderRadius.full → 9999px' },
-    { sh: 'square',  label: 'Square',  token: 'borderRadius.sm → 4px' },
-  ];
-
-  return (
-    <Section id="shapes" eyebrow="04 — Shapes" title="Border Radius Shapes"
-      desc="Three radius presets. Rounded is the Figma-native shape; Pill matches the CONTACT button.">
-      <div className="bsc-row">
-        {shapes.map(({ sh, label, token }) => (
-          <div key={sh} style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-start' }}>
-            <Button shape={sh} size="lg">{label}</Button>
-            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', fontFamily: 'ui-monospace, monospace' }}>{token}</span>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-// ── 05 With Icons ──────────────────────────────────────────────────────────
-
-function IconsSection() {
-  return (
-    <Section id="icons" eyebrow="05 — Icons" title="Icon Compositions"
-      desc="Pass leftIcon / rightIcon for inline icons. Set iconOnly + aria-label for square icon buttons.">
-
-      <div className="bsc-group">
-        <span className="bsc-group-label">Left icon</span>
-        <div className="bsc-row">
-          <Button leftIcon={<SearchIcon />} size="sm">Search</Button>
-          <Button leftIcon={<SearchIcon />}>Search</Button>
-          <Button leftIcon={<SearchIcon />} size="lg">Search</Button>
-          <Button leftIcon={<SearchIcon />} size="xl">Search</Button>
-        </div>
-      </div>
-
-      <div className="bsc-group">
-        <span className="bsc-group-label">Right icon</span>
-        <div className="bsc-row">
-          <Button rightIcon={<ArrowRight />} size="sm">Continue</Button>
-          <Button rightIcon={<ArrowRight />}>Continue</Button>
-          <Button rightIcon={<ArrowRight />} size="lg">Continue</Button>
-          <Button rightIcon={<DownloadIcon />} size="xl">Download</Button>
-        </div>
-      </div>
-
-      <div className="bsc-group">
-        <span className="bsc-group-label">Icon only — all sizes</span>
-        <div className="bsc-row">
-          <Button iconOnly size="sm" aria-label="Search"><SearchIcon /></Button>
-          <Button iconOnly aria-label="Add"><PlusIcon /></Button>
-          <Button iconOnly size="lg" aria-label="Like"><HeartIcon /></Button>
-          <Button iconOnly size="xl" aria-label="Close"><XIcon /></Button>
-        </div>
-      </div>
-
-      <div className="bsc-group">
-        <span className="bsc-group-label">Icon only — all variants</span>
-        <div className="bsc-row">
-          <Button iconOnly variant="primary"     aria-label="Add"><PlusIcon /></Button>
-          <Button iconOnly variant="secondary"   aria-label="Search"><SearchIcon /></Button>
-          <Button iconOnly variant="ghost"       aria-label="Close"><XIcon /></Button>
-          <Button iconOnly variant="destructive" aria-label="Delete"><TrashIcon /></Button>
-        </div>
-      </div>
-    </Section>
-  );
-}
-
-// ── 06 States ──────────────────────────────────────────────────────────────
+// ── 05 — States ────────────────────────────────────────────────────────────
 
 function StatesSection() {
   return (
-    <Section id="states" eyebrow="06 — States" title="Interactive States"
-      desc="Hover and Active are CSS-driven — interact with the buttons below to see them live.">
-      <div className="bsc-state-grid">
-        <div className="bsc-state-card">
-          <span className="bsc-state-label">Default</span>
-          <Button>Explore</Button>
-        </div>
-        <div className="bsc-state-card">
-          <span className="bsc-state-label">Hover me</span>
-          <Button>Explore</Button>
-        </div>
-        <div className="bsc-state-card">
-          <span className="bsc-state-label">Focus (Tab to it)</span>
-          <Button>Explore</Button>
-        </div>
-        <div className="bsc-state-card">
-          <span className="bsc-state-label">Loading</span>
-          <Button loading>Saving…</Button>
-        </div>
-        <div className="bsc-state-card">
-          <span className="bsc-state-label">Disabled</span>
-          <Button disabled>Unavailable</Button>
-        </div>
-        <div className="bsc-state-card">
-          <span className="bsc-state-label">Loading (secondary)</span>
-          <Button variant="secondary" loading>Uploading…</Button>
-        </div>
-        <div className="bsc-state-card">
-          <span className="bsc-state-label">Loading (destructive)</span>
-          <Button variant="destructive" loading>Deleting…</Button>
-        </div>
-        <div className="bsc-state-card">
-          <span className="bsc-state-label">Disabled (ghost)</span>
-          <Button variant="ghost" disabled>Action</Button>
-        </div>
+    <Section id="states" num="05" title="Interactive States"
+      desc="Hover and Active are CSS-driven — interact with the buttons to see them live. Disabled maps exactly to Figma Frame 64 (#f3c0c0).">
+      <div className="bsc-states-grid">
+        {[
+          { label: 'Default',          sub: 'Figma Frame 63 · #ff8e8e',  el: <Button>Post Story</Button> },
+          { label: 'Hover — try it',   sub: 'Brightens toward #ff7070',   el: <Button>Post Story</Button> },
+          { label: 'Active / Pressed', sub: 'Figma Frame 65 · #f95757',  el: <Button>Post Story</Button> },
+          { label: 'Focus (Tab to)',   sub: '2px teal ring, 3px offset',  el: <Button>Post Story</Button> },
+          { label: 'Disabled',         sub: 'Figma Frame 64 · #f3c0c0',  el: <Button disabled>Post Story</Button> },
+          { label: 'Loading',          sub: 'Spinner + aria-busy',        el: <Button loading>Submitting…</Button> },
+          { label: 'Secondary hover',  sub: 'Teal brightens + lift',      el: <Button variant="secondary">Explore</Button> },
+          { label: 'Destructive',      sub: '#f95757 · Figma Frame 65',   el: <Button variant="destructive">Delete</Button> },
+        ].map(({ label, sub, el }) => (
+          <div key={label} className="bsc-state-card">
+            <div className="bsc-state-label">{label}</div>
+            <div className="bsc-state-sub">{sub}</div>
+            <div className="bsc-state-demo">{el}</div>
+          </div>
+        ))}
       </div>
     </Section>
   );
 }
 
-// ── 07 Live Playground ─────────────────────────────────────────────────────
+// ── 06 — Icons ─────────────────────────────────────────────────────────────
+
+function IconsSection() {
+  return (
+    <Section id="icons" num="06" title="Icon Compositions"
+      desc="leftIcon / rightIcon accept any ReactNode. iconOnly renders a square button — must include aria-label.">
+      {[
+        { label: 'Left icon — all sizes',
+          items: [
+            <Button key="sm" size="sm" leftIcon={<SendIcon />}>Post Story</Button>,
+            <Button key="md" leftIcon={<SendIcon />}>Post Story</Button>,
+            <Button key="lg" size="lg" leftIcon={<SendIcon />}>Post Story</Button>,
+            <Button key="xl" size="xl" leftIcon={<SendIcon />}>Post Story</Button>,
+          ]},
+        { label: 'Right icon',
+          items: [
+            <Button key="a" rightIcon={<ArrowRight />}>Continue</Button>,
+            <Button key="b" variant="secondary" rightIcon={<SearchIcon />}>Search</Button>,
+            <Button key="c" variant="ghost" rightIcon={<ArrowRight />}>Skip</Button>,
+          ]},
+        { label: 'Icon only — all variants',
+          items: [
+            <Button key="p"  iconOnly variant="primary"     size="lg" aria-label="Submit"><SendIcon /></Button>,
+            <Button key="s"  iconOnly variant="secondary"   size="lg" aria-label="Search"><SearchIcon /></Button>,
+            <Button key="g"  iconOnly variant="ghost"       size="lg" aria-label="Close"><XIcon /></Button>,
+            <Button key="d"  iconOnly variant="destructive" size="lg" aria-label="Delete"><TrashIcon /></Button>,
+          ]},
+        { label: 'Icon only — all sizes',
+          items: [
+            <Button key="sm" iconOnly size="sm" aria-label="Like"><HeartIcon /></Button>,
+            <Button key="md" iconOnly aria-label="Add"><PlusIcon /></Button>,
+            <Button key="lg" iconOnly size="lg" aria-label="Send"><SendIcon /></Button>,
+            <Button key="xl" iconOnly size="xl" aria-label="Search"><SearchIcon /></Button>,
+          ]},
+      ].map(({ label, items }) => (
+        <div key={label} className="bsc-subsection">
+          <span className="bsc-sublabel">{label}</span>
+          <div className="bsc-icon-row">{items}</div>
+        </div>
+      ))}
+    </Section>
+  );
+}
+
+// ── 07 — Live Playground ───────────────────────────────────────────────────
 
 function Playground() {
-  const [variant,       setVariant]       = useState<ButtonVariant>('primary');
-  const [size,          setSize]          = useState<ButtonSize>('md');
-  const [shape,         setShape]         = useState<ButtonShape>('rounded');
-  const [disabled,      setDisabled]      = useState(false);
-  const [loading,       setLoading]       = useState(false);
-  const [fullWidth,     setFullWidth]     = useState(false);
-  const [label,         setLabel]         = useState('Explore');
-  const [showLeftIcon,  setShowLeftIcon]  = useState(false);
-  const [showRightIcon, setShowRightIcon] = useState(false);
+  const [variant,  setVariant]  = useState<ButtonVariant>('primary');
+  const [size,     setSize]     = useState<ButtonSize>('md');
+  const [shape,    setShape]    = useState<ButtonShape>('rounded');
+  const [disabled, setDisabled] = useState(false);
+  const [loading,  setLoading]  = useState(false);
+  const [full,     setFull]     = useState(false);
+  const [label,    setLabel]    = useState('Post Story');
+  const [leftIc,   setLeftIc]   = useState(false);
+  const [rightIc,  setRightIc]  = useState(false);
 
-  const props = [
+  const attrs = [
     `variant="${variant}"`,
-    size !== 'md' ? `size="${size}"` : null,
-    shape !== 'rounded' ? `shape="${shape}"` : null,
-    showLeftIcon ? `leftIcon={<SearchIcon />}` : null,
-    showRightIcon ? `rightIcon={<ArrowRight />}` : null,
-    disabled ? 'disabled' : null,
-    loading ? 'loading' : null,
-    fullWidth ? 'fullWidth' : null,
-  ].filter(Boolean);
+    size    !== 'md'      ? `size="${size}"`     : null,
+    shape   !== 'rounded' ? `shape="${shape}"`   : null,
+    leftIc  ? 'leftIcon={<SendIcon />}'          : null,
+    rightIc ? 'rightIcon={<ArrowRight />}'       : null,
+    disabled ? 'disabled'                        : null,
+    loading  ? 'loading'                         : null,
+    full     ? 'fullWidth'                       : null,
+  ].filter(Boolean) as string[];
 
-  const code = props.length <= 2
-    ? `<Button ${props.join(' ')}>${label}</Button>`
-    : `<Button\n  ${props.join('\n  ')}\n>\n  ${label}\n</Button>`;
+  const short  = attrs.length <= 2;
+  const code   = short
+    ? `<Button ${attrs.join(' ')}>${label}</Button>`
+    : `<Button\n  ${attrs.join('\n  ')}\n>\n  ${label}\n</Button>`;
 
   return (
-    <Section id="playground" eyebrow="07 — Playground" title="Live Prop Playground"
-      desc="Adjust props to see the button update in real time and copy the ready-to-use code snippet.">
+    <Section id="playground" num="07" title="Live Playground"
+      desc="Adjust any prop — the preview and code snippet update instantly.">
       <div className="bsc-playground">
-        <div className="bsc-playground-left">
-          <div className="bsc-preview">
+        <div className="bsc-play-left">
+          <div className="bsc-preview-box">
             <Button
-              variant={variant}
-              size={size}
-              shape={shape}
-              disabled={disabled}
-              loading={loading}
-              fullWidth={fullWidth}
-              leftIcon={showLeftIcon ? <SearchIcon /> : undefined}
-              rightIcon={showRightIcon ? <ArrowRight /> : undefined}
+              variant={variant} size={size} shape={shape}
+              disabled={disabled} loading={loading} fullWidth={full}
+              leftIcon={leftIc ? <SendIcon /> : undefined}
+              rightIcon={rightIc ? <ArrowRight /> : undefined}
             >
               {label}
             </Button>
           </div>
-          <pre className="bsc-code-block">{code}</pre>
+          <pre className="bsc-code">{code}</pre>
         </div>
 
         <div className="bsc-controls">
-          <p className="bsc-controls-title">Props</p>
+          <p className="bsc-ctrl-head">Props</p>
 
-          <div className="bsc-control">
+          <div className="bsc-ctrl">
             <label>variant</label>
             <select value={variant} onChange={e => setVariant(e.target.value as ButtonVariant)}>
-              {(['primary','secondary','ghost','destructive','link'] as ButtonVariant[]).map(v => (
-                <option key={v} value={v}>{v}</option>
-              ))}
+              {(['primary','secondary','ghost','destructive','link'] as ButtonVariant[]).map(v =>
+                <option key={v} value={v}>{v}</option>)}
             </select>
           </div>
 
-          <div className="bsc-control">
+          <div className="bsc-ctrl">
             <label>size</label>
             <select value={size} onChange={e => setSize(e.target.value as ButtonSize)}>
-              {(['sm','md','lg','xl'] as ButtonSize[]).map(s => (
-                <option key={s} value={s}>{s}</option>
-              ))}
+              {(['sm','md','lg','xl'] as ButtonSize[]).map(s =>
+                <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
 
-          <div className="bsc-control">
+          <div className="bsc-ctrl">
             <label>shape</label>
             <select value={shape} onChange={e => setShape(e.target.value as ButtonShape)}>
-              {(['rounded','pill','square'] as ButtonShape[]).map(s => (
-                <option key={s} value={s}>{s}</option>
-              ))}
+              {(['rounded','pill','square'] as ButtonShape[]).map(s =>
+                <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
 
-          <div className="bsc-control">
-            <label>children (label)</label>
+          <div className="bsc-ctrl">
+            <label>label text</label>
             <input type="text" value={label} onChange={e => setLabel(e.target.value)} />
           </div>
 
-          <label className="bsc-control-row">
-            <input type="checkbox" checked={showLeftIcon} onChange={e => setShowLeftIcon(e.target.checked)} />
-            <span>leftIcon</span>
-          </label>
-          <label className="bsc-control-row">
-            <input type="checkbox" checked={showRightIcon} onChange={e => setShowRightIcon(e.target.checked)} />
-            <span>rightIcon</span>
-          </label>
-          <label className="bsc-control-row">
-            <input type="checkbox" checked={disabled} onChange={e => setDisabled(e.target.checked)} />
-            <span>disabled</span>
-          </label>
-          <label className="bsc-control-row">
-            <input type="checkbox" checked={loading} onChange={e => setLoading(e.target.checked)} />
-            <span>loading</span>
-          </label>
-          <label className="bsc-control-row">
-            <input type="checkbox" checked={fullWidth} onChange={e => setFullWidth(e.target.checked)} />
-            <span>fullWidth</span>
-          </label>
+          {([
+            [leftIc,   setLeftIc,   'leftIcon'],
+            [rightIc,  setRightIc,  'rightIcon'],
+            [disabled, setDisabled, 'disabled'],
+            [loading,  setLoading,  'loading'],
+            [full,     setFull,     'fullWidth'],
+          ] as [boolean, (v: boolean) => void, string][]).map(([val, set, lbl]) => (
+            <label key={lbl} className="bsc-ctrl-check">
+              <input type="checkbox" checked={val} onChange={e => set(e.target.checked)} />
+              <span>{lbl}</span>
+            </label>
+          ))}
         </div>
       </div>
     </Section>
   );
 }
 
-// ── 08 Props API ───────────────────────────────────────────────────────────
+// ── 08 — Props API ─────────────────────────────────────────────────────────
 
 function PropsAPI() {
   const rows = [
-    { name: 'children',  type: 'ReactNode',      def: '—',         req: true,  desc: 'Button label text, or the icon when iconOnly is true.' },
-    { name: 'variant',   type: 'ButtonVariant',  def: '"primary"', req: false, desc: 'primary | secondary | ghost | destructive | link' },
-    { name: 'size',      type: 'ButtonSize',     def: '"md"',      req: false, desc: 'sm (32 px) | md (40 px) | lg (48 px) | xl (58 px)' },
-    { name: 'shape',     type: 'ButtonShape',    def: '"rounded"', req: false, desc: 'rounded (37 px) | pill (9999 px) | square (4 px)' },
-    { name: 'leftIcon',  type: 'ReactNode',      def: 'undefined', req: false, desc: 'Icon rendered before the label. Suppressed during loading.' },
-    { name: 'rightIcon', type: 'ReactNode',      def: 'undefined', req: false, desc: 'Icon rendered after the label. Suppressed during loading.' },
-    { name: 'iconOnly',  type: 'boolean',        def: 'false',     req: false, desc: 'Square icon-only button. children = the icon. Must set aria-label.' },
-    { name: 'loading',   type: 'boolean',        def: 'false',     req: false, desc: 'Replaces leftIcon with spinner. Disables all interaction.' },
-    { name: 'disabled',  type: 'boolean',        def: 'false',     req: false, desc: 'Renders at 40 % opacity; pointer-events: none.' },
-    { name: 'fullWidth', type: 'boolean',        def: 'false',     req: false, desc: 'Stretches button to 100 % of its container.' },
-    { name: 'className', type: 'string',         def: '""',        req: false, desc: 'Appended to the root class list for local overrides.' },
-    { name: '...rest',   type: 'ButtonHTMLAttributes', def: '—',   req: false, desc: 'All native <button> attributes (onClick, type, form, …).' },
+    { name:'children',  type:'ReactNode',          def:'—',         req:true,  desc:'Label text. When iconOnly=true, provide the icon node instead.' },
+    { name:'variant',   type:'ButtonVariant',       def:'"primary"', req:false, desc:'primary | secondary | ghost | destructive | link' },
+    { name:'size',      type:'ButtonSize',          def:'"md"',      req:false, desc:'sm(40px) | md(52px) | lg(64px) | xl(88px ≈ Figma)' },
+    { name:'shape',     type:'ButtonShape',         def:'"rounded"', req:false, desc:'rounded (per-size radius) | pill (9999px) | square (6px)' },
+    { name:'leftIcon',  type:'ReactNode',           def:'undefined', req:false, desc:'Icon before label. Hidden during loading.' },
+    { name:'rightIcon', type:'ReactNode',           def:'undefined', req:false, desc:'Icon after label. Hidden during loading.' },
+    { name:'iconOnly',  type:'boolean',             def:'false',     req:false, desc:'Square icon button. children = icon. Must set aria-label.' },
+    { name:'loading',   type:'boolean',             def:'false',     req:false, desc:'Shows spinner, sets aria-busy, disables all interaction.' },
+    { name:'disabled',  type:'boolean',             def:'false',     req:false, desc:'Primary: Figma Frame 64 muted color. Others: 40% opacity.' },
+    { name:'fullWidth', type:'boolean',             def:'false',     req:false, desc:'width: 100% — matches Figma\'s full-width form buttons.' },
+    { name:'className', type:'string',              def:'""',        req:false, desc:'Appended to root class list for local overrides.' },
+    { name:'...rest',   type:'ButtonHTMLAttributes',def:'—',         req:false, desc:'All native <button> attributes (onClick, type, form, ref…).' },
   ];
 
   return (
-    <Section id="api" eyebrow="08 — API" title="Props Reference"
-      desc="Full TypeScript interface. All Figma measurements are pre-applied — no manual sizing needed.">
+    <Section id="api" num="08" title="Props API"
+      desc="Full TypeScript interface. Import types from 'src/components/Button'.">
       <div className="bsc-table-wrap">
         <table className="bsc-table">
           <thead>
-            <tr>
-              <th>Prop</th><th>Type</th><th>Default</th><th>Required</th><th>Description</th>
-            </tr>
+            <tr><th>Prop</th><th>Type</th><th>Default</th><th>Req</th><th>Description</th></tr>
           </thead>
           <tbody>
             {rows.map(r => (
@@ -416,8 +465,8 @@ function PropsAPI() {
                 <td><code>{r.name}</code></td>
                 <td><code>{r.type}</code></td>
                 <td><code>{r.def}</code></td>
-                <td className={r.req ? 'bsc-required' : ''} style={{ color: r.req ? '#dc3a3a' : 'rgba(255,255,255,0.35)', fontSize: 12, fontWeight: 600 }}>{r.req ? 'Yes' : 'No'}</td>
-                <td style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12 }}>{r.desc}</td>
+                <td style={{ color: r.req ? '#f95757' : 'rgba(255,255,255,0.3)', fontSize:11, fontWeight:700 }}>{r.req ? 'Yes' : 'No'}</td>
+                <td style={{ color:'rgba(255,255,255,0.5)', fontSize:12 }}>{r.desc}</td>
               </tr>
             ))}
           </tbody>
@@ -427,36 +476,38 @@ function PropsAPI() {
   );
 }
 
-// ── 09 Code Snippets ───────────────────────────────────────────────────────
+// ── 09 — Code Snippets ─────────────────────────────────────────────────────
 
 function Snippets() {
   const examples = [
-    { label: 'Primary CTA',
-      code: `<Button variant="primary">Explore</Button>` },
-    { label: 'Secondary action',
-      code: `<Button variant="secondary">Cancel</Button>` },
-    { label: 'Destructive with icon',
-      code: `<Button variant="destructive" leftIcon={<TrashIcon />}>\n  Delete account\n</Button>` },
-    { label: 'Full-width large pill (matches ARISE CTA)',
-      code: `<Button variant="primary" size="xl" shape="pill" fullWidth>\n  Get Started\n</Button>` },
-    { label: 'Icon-only (requires aria-label)',
+    { label: 'Default — exact Figma button',
+      code: `<Button>Post Story</Button>` },
+    { label: 'Submit Anonymously (full-width XL, matches Figma exactly)',
+      code: `<Button size="xl" fullWidth>\n  Submit Anonymously\n</Button>` },
+    { label: 'Secondary teal — Explore button style',
+      code: `<Button variant="secondary">Explore</Button>` },
+    { label: 'With icon — left',
+      code: `<Button leftIcon={<SendIcon />}>Post Story</Button>` },
+    { label: 'Destructive action with confirm',
+      code: `<Button variant="destructive" leftIcon={<TrashIcon />}>\n  Delete Entry\n</Button>` },
+    { label: 'Loading state (on async submit)',
+      code: `const [submitting, setSubmitting] = useState(false);\n\n<Button loading={submitting} onClick={handleSubmit}>\n  Post Story\n</Button>` },
+    { label: 'Icon only — needs aria-label',
       code: `<Button iconOnly variant="ghost" aria-label="Close">\n  <XIcon />\n</Button>` },
-    { label: 'Loading state',
-      code: `<Button variant="primary" loading>\n  Saving changes…\n</Button>` },
-    { label: 'As submit button',
-      code: `<Button type="submit" size="lg" leftIcon={<SearchIcon />}>\n  Search\n</Button>` },
-    { label: 'Link variant — inline action',
-      code: `<Button variant="link" onClick={handleViewAll}>\n  View all resources →\n</Button>` },
+    { label: 'Full-width pill (matches original Figma rounded style)',
+      code: `<Button size="xl" shape="pill" fullWidth>\n  Submit Anonymously\n</Button>` },
+    { label: 'Link variant — inline',
+      code: `<Button variant="link">\n  View all resources →\n</Button>` },
   ];
 
   return (
-    <Section id="snippets" eyebrow="09 — Snippets" title="Copy-Ready Examples"
-      desc="Common usage patterns ready to paste into your project.">
+    <Section id="snippets" num="09" title="Copy-Ready Snippets"
+      desc="Common usage patterns. Import: import { Button } from '../components/Button'">
       <div className="bsc-snippets">
         {examples.map(ex => (
           <div key={ex.label} className="bsc-snippet">
             <span className="bsc-snippet-label">{ex.label}</span>
-            <pre className="bsc-code-block">{ex.code}</pre>
+            <pre className="bsc-code">{ex.code}</pre>
           </div>
         ))}
       </div>
@@ -470,12 +521,12 @@ export default function ButtonShowcase() {
   return (
     <div className="bsc">
       <div className="bsc-body">
-        <TokenUsage />
+        <FigmaSource />
+        <TokenPreview />
         <VariantsSection />
         <SizesSection />
-        <ShapesSection />
-        <IconsSection />
         <StatesSection />
+        <IconsSection />
         <Playground />
         <PropsAPI />
         <Snippets />

@@ -1,0 +1,143 @@
+/*
+  FeatureCard — ARISE Design System
+  ────────────────────────────────────
+  Figma source : D3C-FINAL node 585:4764 (Awareness infographic cards)
+
+  Color tokens used:
+    background.secondary  #1e1a2c
+    border.subtle         rgba(255,255,255,0.3)
+    text.primary          #ffffff
+    text.muted            rgba(255,255,255,0.6)
+    shadows.card          0 3 8 rgba(0,0,0,0.15)
+
+  Typography:
+    Title    — Be Vietnam Pro Bold 30px   (Figma 44px × 0.681)
+    Subtitle — Be Vietnam Pro Bold 14px   (Figma 20px × 0.681)
+    Desc     — Be Vietnam Pro Medium 15px
+
+  CSS custom properties:
+    --fc-accent        per-variant tinted bg on hover
+    --fc-accent-border per-variant tinted border on hover
+*/
+
+/* ── Link wrapper ───────────────────────────────────────────────────────────── */
+
+.fc__link-wrapper {
+  text-decoration: none;
+  display:         block;
+}
+
+/* ── Card shell ─────────────────────────────────────────────────────────────── */
+
+.fc {
+  --fc-accent:        rgba(255, 255, 255, 0.04);
+  --fc-accent-border: rgba(255, 255, 255, 0.3);
+
+  display:          flex;
+  flex-direction:   column;
+  width:            314px;                              /* Figma 461.7px × 0.681 */
+  background:       #1e1a2c;                            /* colors.background.secondary */
+  border:           1px solid rgba(255, 255, 255, 0.3); /* colors.border.subtle */
+  border-radius:    29px;                               /* Figma 42.75px × 0.681 */
+  box-shadow:       0 3px 8px rgba(0, 0, 0, 0.15);     /* shadows.card */
+  overflow:         hidden;
+  cursor:           pointer;
+  transition:
+    transform        150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       150ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color     150ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fc__link-wrapper:hover .fc,
+.fc:hover {
+  transform:   translateY(-6px);
+  box-shadow:  0 12px 28px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--fc-accent-border);
+  border-color: var(--fc-accent-border);
+  background:  color-mix(in srgb, #1e1a2c 90%, transparent);
+}
+
+.fc__link-wrapper:active .fc,
+.fc:active {
+  transform:  translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Icon area ──────────────────────────────────────────────────────────────── */
+
+.fc__icon-wrap {
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  height:           180px;
+  padding:          12px;
+  background:       var(--fc-accent);
+  border-bottom:    1px solid rgba(255, 255, 255, 0.06);
+  transition:       background 150ms ease;
+}
+
+.fc__link-wrapper:hover .fc__icon-wrap,
+.fc:hover .fc__icon-wrap {
+  background: var(--fc-accent);
+}
+
+.fc__icon {
+  max-width:      140px;
+  max-height:     140px;
+  object-fit:     contain;
+  transition:     transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1); /* animation.easing.spring */
+}
+
+.fc__link-wrapper:hover .fc__icon,
+.fc:hover .fc__icon {
+  transform: scale(1.08);
+}
+
+/* ── Body ───────────────────────────────────────────────────────────────────── */
+
+.fc__body {
+  flex:    1;
+  padding: 18px 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap:     4px;
+}
+
+.fc__title {
+  font-size:      30px;                               /* Figma 44px × 0.681 */
+  font-weight:    700;                                /* typography.fontWeight.bold */
+  color:          #ffffff;                            /* colors.text.primary */
+  margin:         0;
+  line-height:    1.1;
+  letter-spacing: -0.8px;
+}
+
+.fc__subtitle {
+  font-size:   14px;                                  /* Figma 20px × 0.681 */
+  font-weight: 700;
+  color:       #d0d0d0;                               /* Figma exact */
+  margin:      0;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+}
+
+.fc__desc {
+  font-size:   15px;
+  font-weight: 500;
+  color:       rgba(255, 255, 255, 0.6);              /* colors.text.muted */
+  margin:      6px 0 0;
+  line-height: 1.5;
+}
+
+/* ── Footer (Explore button) ────────────────────────────────────────────────── */
+
+.fc__footer {
+  padding:     0 20px 18px;
+  margin-top:  auto;
+}
+
+/* ── Variant-specific accent tints ──────────────────────────────────────────── */
+
+.fc--awareness .fc__title        { color: #7fdfff; }  /* Figma #7fdfff for awareness text */
+.fc--moodTracker .fc__title      { color: #ff8e8e; }  /* colors.brand.salmon */
+.fc--studentExperiences .fc__title { color: #31bbe1; } /* colors.accent.teal */

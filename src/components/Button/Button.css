@@ -1,35 +1,55 @@
 /*
-  Button component
-  Tokens: src/styles/design-tokens.ts
-  Figma:  https://www.figma.com/design/GiWAOYZ4BamCKOXSL6PslJ/D3C-FINAL?node-id=2019-3818
+  Button — ARISE Design System
+  ────────────────────────────
+  Figma source : D3C-FINAL — nodes 639:8591 (Post Story) & 639:8595 (Submit Anonymously)
+  Canvas size  : 1880 px wide
 
-  Variants : primary | secondary | ghost | destructive | link
-  Sizes    : sm | md | lg | xl
-  Shapes   : rounded | pill | square
+  Figma measurements (at canvas scale):
+    Height        131 px
+    Border-radius  60 px
+    Font           Be Vietnam Pro ExtraBold  40 px
+    Text color     #1b1828  (very dark purple)
+    Border         1 px solid white
+    Frame 63 bg    #ff8e8e  → Default state
+    Frame 64 bg    #f3c0c0  → Muted / Disabled state
+    Frame 65 bg    #f95757  → Active / Pressed state
+
+  Size tiers (scaled from 1880 → 1280 px viewport, then rounded):
+    xl  88 px height / 28 px font  (closest to Figma native)
+    lg  64 px height / 20 px font
+    md  52 px height / 17 px font  (default)
+    sm  40 px height / 14 px font
+
+  Variants:
+    primary     → #ff8e8e salmon  (Figma Frame 63 — the ARISE brand button)
+    secondary   → #31bbe1 teal    (from Figma Explore buttons)
+    ghost       → transparent + white border
+    destructive → #f95757         (Figma Frame 65 — inherently signals danger)
+    link        → text only, no bg
 */
 
 /* ── Base ──────────────────────────────────────────────────────────────────── */
 
 .btn {
-  /* Slot variables — overridden by variant/size/shape modifiers */
-  --_bg:           transparent;
-  --_color:        #ffffff;
-  --_border:       transparent;
-  --_shadow:       none;
-  --_radius:       37px;      /* borderRadius.button */
-  --_height:       40px;
-  --_px:           20px;
-  --_font-size:    15px;
-  --_font-weight:  700;       /* typography.fontWeight.bold */
-  --_icon-size:    16px;
-  --_gap:          8px;
+  /* Slot variables — overridden by modifier classes below */
+  --_bg:          #ff8e8e;         /* colors.brand.salmon */
+  --_color:       #1b1828;         /* colors.brand.dark */
+  --_border:      rgba(255,255,255,0.7);
+  --_shadow:      none;
+  --_radius:      26px;
+  --_height:      52px;
+  --_px:          28px;
+  --_font-size:   17px;
+  --_font-weight: 800;             /* typography.fontWeight.extraBold */
+  --_icon-size:   18px;
+  --_gap:         8px;
   --_transition:
-    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), /* animation.duration.base / easing.default */
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),  /* animation.duration.base */
     border-color     150ms cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow       150ms cubic-bezier(0.4, 0, 0.2, 1),
     color            150ms cubic-bezier(0.4, 0, 0.2, 1),
     opacity          150ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform        100ms cubic-bezier(0.4, 0, 0.2, 1); /* animation.duration.fast */
+    transform        100ms cubic-bezier(0.4, 0, 0.2, 1);  /* animation.duration.fast */
 
   display:          inline-flex;
   align-items:      center;
@@ -45,7 +65,7 @@
   font-family:      'Be Vietnam Pro', sans-serif; /* typography.fontFamily.primary */
   font-size:        var(--_font-size);
   font-weight:      var(--_font-weight);
-  letter-spacing:   -0.02em;
+  letter-spacing:   -0.01em;
   line-height:      1;
   text-decoration:  none;
   cursor:           pointer;
@@ -59,79 +79,84 @@
 
 /* ── Variants ──────────────────────────────────────────────────────────────── */
 
-/* Primary — teal fill, from Figma Explore button
-   Token: colors.accent.teal (rgba 49,187,225 at 0.69 opacity) */
+/* Primary — Figma Frame 63 (#ff8e8e)
+   Hover moves toward active state, Active = Figma Frame 65 (#f95757) */
 .btn--primary {
-  --_bg:     rgba(49, 187, 225, 0.69);
-  --_border: transparent;
-  --_shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.15); /* shadows.card */
+  --_bg:     #ff8e8e;                    /* colors.brand.salmon */
+  --_color:  #1b1828;                    /* colors.brand.dark */
+  --_border: rgba(255, 255, 255, 0.7);
 }
 .btn--primary:not(:disabled):not(.btn--loading):hover {
-  background: rgba(49, 187, 225, 0.85);
-  box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.25); /* shadows.nav */
+  background: #ff7070;
   transform:  translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 87, 87, 0.35);
 }
 .btn--primary:not(:disabled):not(.btn--loading):active {
-  background: rgba(49, 187, 225, 0.95);
-  box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.15);
+  background: #f95757;                   /* colors.brand.salmonActive — Figma Frame 65 */
   transform:  translateY(0);
+  box-shadow: none;
 }
 
-/* Secondary — outlined teal
-   Token: colors.accent.blue for text, colors.accent.teal at 50% for border */
+/* Secondary — teal fill, from Figma Explore buttons */
 .btn--secondary {
-  --_color:  #7eb5d7; /* colors.accent.blue */
-  --_border: rgba(49, 187, 225, 0.5);
+  --_bg:     rgba(49, 187, 225, 0.69);   /* colors.accent.teal */
+  --_color:  #ffffff;
+  --_border: transparent;
+  --_shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
 }
 .btn--secondary:not(:disabled):not(.btn--loading):hover {
-  background:   rgba(49, 187, 225, 0.08);
-  border-color: rgba(49, 187, 225, 0.8);
-  color:        #31bbe1;
+  background: rgba(49, 187, 225, 0.85);
+  transform:  translateY(-1px);
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.25);
 }
 .btn--secondary:not(:disabled):not(.btn--loading):active {
-  background:   rgba(49, 187, 225, 0.12);
-  border-color: rgba(49, 187, 225, 1);
+  background: rgba(49, 187, 225, 0.95);
+  transform:  translateY(0);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Ghost — no background, white text */
+/* Ghost — transparent, white border (inspired by CONTACT button glass style) */
 .btn--ghost {
-  --_color:  rgba(255, 255, 255, 0.75);
-  --_border: transparent;
+  --_bg:     transparent;
+  --_color:  rgba(255, 255, 255, 0.85);
+  --_border: rgba(255, 255, 255, 0.35);
 }
 .btn--ghost:not(:disabled):not(.btn--loading):hover {
-  background: rgba(255, 255, 255, 0.08);
-  color:      #ffffff;
+  background:   rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.6);
+  color:        #ffffff;
 }
 .btn--ghost:not(:disabled):not(.btn--loading):active {
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* Destructive — red fill
-   Token: colors.state.destructive (#dc3a3a) */
+/* Destructive — Figma Frame 65 red (#f95757) used as danger signal */
 .btn--destructive {
-  --_bg:     rgba(220, 58, 58, 0.9);
-  --_border: transparent;
-  --_shadow: 0px 3px 8px 0px rgba(220, 58, 58, 0.25);
+  --_bg:     #f95757;                    /* colors.brand.salmonActive / colors.state.destructive */
+  --_color:  #ffffff;
+  --_border: rgba(255, 255, 255, 0.5);
+  --_shadow: 0px 3px 10px rgba(249, 87, 87, 0.3);
 }
 .btn--destructive:not(:disabled):not(.btn--loading):hover {
-  background: rgba(220, 58, 58, 1);
-  box-shadow: 0px 5px 12px 0px rgba(220, 58, 58, 0.35);
+  background: #ff6060;
   transform:  translateY(-1px);
+  box-shadow: 0px 5px 14px rgba(249, 87, 87, 0.4);
 }
 .btn--destructive:not(:disabled):not(.btn--loading):active {
-  background: rgba(200, 50, 50, 1);
-  box-shadow: 0px 3px 8px 0px rgba(220, 58, 58, 0.25);
+  background: #e84040;
   transform:  translateY(0);
 }
 
-/* Link — text-only, teal
-   Token: colors.accent.blue for default, colors.accent.teal for hover */
+/* Link — text only, teal color */
 .btn--link {
-  --_color:  #7eb5d7; /* colors.accent.blue */
-  --_px:     4px;
+  --_bg:          transparent;
+  --_color:       #7eb5d7;               /* colors.accent.blue */
+  --_border:      transparent;
+  --_shadow:      none;
+  --_px:          4px;
+  --_font-weight: 600;
 
-  height:      auto;
-  font-weight: 500; /* typography.fontWeight.medium */
+  height:               auto;
   text-underline-offset: 3px;
 }
 .btn--link:not(:disabled):not(.btn--loading):hover {
@@ -144,65 +169,80 @@
 
 /* ── Sizes ─────────────────────────────────────────────────────────────────── */
 
+/* sm — 40 px */
 .btn--sm {
-  --_height:    32px;
-  --_px:        12px;
-  --_font-size: 13px;
-  --_icon-size: 14px;
+  --_height:    40px;
+  --_px:        18px;
+  --_font-size: 14px;
+  --_icon-size: 15px;
   --_gap:       6px;
+  --_radius:    20px;
 }
 
-/* md is the base — values already set above */
+/* md — 52 px (default) */
+/* values already set on .btn */
 
+/* lg — 64 px */
 .btn--lg {
-  --_height:    48px;
-  --_px:        24px;
-  --_font-size: 17px;
-  --_icon-size: 18px;
-  --_gap:       8px;
-}
-
-.btn--xl {
-  --_height:    58px;  /* matches Figma Explore button height */
-  --_px:        32px;
+  --_height:    64px;
+  --_px:        36px;
   --_font-size: 20px;
   --_icon-size: 20px;
   --_gap:       10px;
+  --_radius:    32px;
+}
+
+/* xl — 88 px  (1:1 Figma match scaled to 1280 px viewport) */
+.btn--xl {
+  --_height:    88px;
+  --_px:        48px;
+  --_font-size: 28px;
+  --_icon-size: 24px;
+  --_gap:       12px;
+  --_radius:    44px;
 }
 
 /* ── Shapes ────────────────────────────────────────────────────────────────── */
 
-.btn--shape-rounded {
-  --_radius: 37px;    /* borderRadius.button */
-}
+/* rounded — per-size radius from above (default) */
 
 .btn--shape-pill {
-  --_radius: 9999px;  /* borderRadius.full — matches CONTACT button */
+  --_radius: 9999px;
 }
 
 .btn--shape-square {
-  --_radius: 4px;     /* borderRadius.sm */
+  --_radius: 6px;
 }
 
-/* ── Disabled & Loading ────────────────────────────────────────────────────── */
+/* ── States ────────────────────────────────────────────────────────────────── */
 
-.btn:disabled,
-.btn[aria-disabled='true']:not(.btn--loading) {
+/* Disabled — Figma Frame 64 (#f3c0c0) is the muted/inactive state */
+.btn--primary:disabled,
+.btn--primary[aria-disabled='true']:not(.btn--loading) {
+  background:     #f3c0c0;             /* colors.brand.salmonMuted — Figma Frame 64 */
+  border-color:   rgba(255,255,255,0.4);
+  opacity:        1;
+  cursor:         not-allowed;
+  pointer-events: none;
+}
+
+.btn:disabled:not(.btn--primary),
+.btn[aria-disabled='true']:not(.btn--loading):not(.btn--primary) {
   opacity:        0.4;
   cursor:         not-allowed;
   pointer-events: none;
 }
 
+/* Loading */
 .btn--loading {
   cursor:         wait;
   pointer-events: none;
-  opacity:        0.8;
+  opacity:        0.85;
 }
 
-/* ── Focus ring — WCAG 2.1 AA ────────────────────────────────────────────── */
-
+/* Focus ring — WCAG 2.1 AA */
 .btn:focus-visible {
-  outline:        2px solid rgba(49, 187, 225, 0.8); /* colors.accent.teal at 80% */
+  outline:        2px solid rgba(49, 187, 225, 0.9);  /* colors.accent.teal */
   outline-offset: 3px;
 }
 
@@ -212,13 +252,13 @@
   width: 100%;
 }
 
-/* ── Icon-only (square, no horizontal padding) ────────────────────────────── */
+/* ── Icon only ──────────────────────────────────────────────────────────────── */
 
 .btn--icon-only        { --_px: 0px; }
-.btn--icon-only.btn--sm  { width: 32px; }
-.btn--icon-only.btn--md  { width: 40px; }
-.btn--icon-only.btn--lg  { width: 48px; }
-.btn--icon-only.btn--xl  { width: 58px; }
+.btn--icon-only.btn--sm  { width: 40px; }
+.btn--icon-only.btn--md  { width: 52px; }
+.btn--icon-only.btn--lg  { width: 64px; }
+.btn--icon-only.btn--xl  { width: 88px; }
 
 /* ── Sub-elements ────────────────────────────────────────────────────────────── */
 
@@ -242,7 +282,7 @@
   height:  var(--_icon-size);
 }
 
-/* ── Loading spinner ──────────────────────────────────────────────────────── */
+/* ── Loading spinner ─────────────────────────────────────────────────────────── */
 
 .btn__spinner {
   flex-shrink: 0;

@@ -1,0 +1,161 @@
+/*
+  Navbar — ARISE Design System
+  ─────────────────────────────
+  Figma source: D3C-FINAL node 2019:3817
+
+  Color tokens:
+    background.primary   #1a1229
+    text.primary         #ffffff
+    accent.orange        #ff7c2b  (logo R)
+    accent.brandBlue     #2ab0fe  (logo ISE)
+    border.subtle        rgba(255,255,255,0.3)
+
+  Typography:
+    Logo     — Arya Bold 43px / tracking -2.1px
+    Nav link — Be Vietnam Pro Bold 19px / tracking -0.55px
+    Contact  — Be Vietnam Pro SemiBold 16px
+*/
+
+/* ── Shell ──────────────────────────────────────────────────────────────────── */
+
+.navbar {
+  background: #1a1229;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.navbar__inner {
+  display:         flex;
+  align-items:     center;
+  gap:             24px;
+  height:          64px;
+  padding:         0 40px;
+  max-width:       1440px;
+  margin:          0 auto;
+}
+
+/* ── Logo ───────────────────────────────────────────────────────────────────── */
+
+.navbar__logo {
+  display:     flex;
+  align-items: center;
+  gap:         6px;
+  flex-shrink: 0;
+  margin-right: 24px;
+}
+
+.navbar__logo-text {
+  font-family:  'Arya', sans-serif;      /* typography.fontFamily.display */
+  font-weight:  700;
+  font-size:    29px;
+  line-height:  1;
+  letter-spacing: -1.4px;
+  text-shadow:  0 1px 1px rgba(0, 0, 0, 0.36);
+  white-space:  nowrap;
+}
+
+.navbar__logo-a   { color: #ffffff; }
+.navbar__logo-r   { color: #ff7c2b; }           /* colors.accent.orange */
+.navbar__logo-ise { color: #2ab0fe; }            /* colors.accent.brandBlue */
+
+.navbar__mascot {
+  width:         24px;
+  height:        auto;
+  object-fit:    contain;
+  image-rendering: pixelated;
+  transform:     scaleY(-1) rotate(180deg);      /* Figma -scale-y-100 rotate-180 */
+}
+
+/* ── Nav pill ───────────────────────────────────────────────────────────────── */
+
+.navbar__pill {
+  display:        flex;
+  align-items:    center;
+  gap:            4px;
+  flex:           1;
+  justify-content: center;
+  height:         44px;
+  padding:        0 20px;
+  background:     rgba(255, 255, 255, 0.08);     /* glass fill (opacity 20% in Figma) */
+  border-radius:  25px;                          /* Figma 36px → ×0.681 */
+  box-shadow:     0 5px 12px rgba(0, 0, 0, 0.25); /* shadows.nav */
+  max-width:      680px;
+}
+
+/* ── Nav links ──────────────────────────────────────────────────────────────── */
+
+.navbar__link {
+  display:         block;
+  padding:         4px 16px;
+  font-family:     'Be Vietnam Pro', sans-serif;  /* typography.fontFamily.primary */
+  font-size:       13px;                          /* Figma 19px → scaled for component */
+  font-weight:     700;                           /* typography.fontWeight.bold */
+  letter-spacing:  -0.4px;
+  color:           rgba(255, 255, 255, 0.85);     /* colors.text.primary */
+  text-decoration: none;
+  white-space:     nowrap;
+  border-radius:   16px;
+  transition:      color 150ms ease, background 150ms ease; /* animation.duration.base */
+}
+
+.navbar__link:hover {
+  color:       #ffffff;
+  background:  rgba(255, 255, 255, 0.06);
+}
+
+.navbar__link--active {
+  color: #ffffff;
+}
+
+.navbar__link:focus-visible {
+  outline:        2px solid rgba(49, 187, 225, 0.9);  /* colors.accent.teal */
+  outline-offset: 2px;
+}
+
+/* ── Contact button ─────────────────────────────────────────────────────────── */
+
+.navbar__contact {
+  flex-shrink:  0;
+  padding:      0 22px;
+  height:       38px;
+  background:   rgba(255, 255, 255, 0.15);
+  border:       1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;                          /* borderRadius.full */
+  box-shadow:   0 9px 9px rgba(0, 0, 0, 0.25);  /* shadows.button */
+  font-family:  'Be Vietnam Pro', sans-serif;
+  font-size:    14px;                            /* Figma 24px → scaled */
+  font-weight:  600;                             /* typography.fontWeight.semiBold */
+  letter-spacing: 0.02em;
+  color:        #ffffff;                         /* colors.text.primary */
+  cursor:       pointer;
+  white-space:  nowrap;
+  transition:   background 150ms ease, box-shadow 150ms ease; /* animation.duration.base */
+  outline:      none;
+}
+
+.navbar__contact:hover {
+  background:  rgba(255, 255, 255, 0.25);
+  box-shadow:  0 12px 14px rgba(0, 0, 0, 0.3);
+}
+
+.navbar__contact:active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar__contact:focus-visible {
+  outline:        2px solid rgba(49, 187, 225, 0.9);
+  outline-offset: 3px;
+}
+
+/* ── Bottom separator line (matches Figma Line8) ────────────────────────────── */
+
+.navbar--with-line {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .navbar__pill { display: none; }
+  .navbar__inner { justify-content: space-between; }
+}

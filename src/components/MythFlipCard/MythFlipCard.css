@@ -1,0 +1,221 @@
+/*
+  MythFlipCard — ARISE Design System
+  ────────────────────────────────────
+  Figma source : D3C-FINAL node 639:9503
+  Canvas       : 1367 px wide, card 652×787 px  →  scale ×0.527
+
+  Color tokens used:
+    Front bg overlay   rgba(60, 37, 37, 0.5)   — red myth tint
+    Front glow         rgba(245, 16, 16, 0.1)
+    Back bg overlay    rgba(37, 60, 38, 0.4)    — green truth tint
+    Back glow          rgba(142, 245, 16, 0.1)
+    Heading            #ff7f7f
+    Body text          #ffffff
+    Dot active         #31bbe1  (colors.accent.teal)
+    Dot inactive       rgba(255,255,255,0.3)
+
+  Typography:
+    Heading  — Be Vietnam Pro ExtraBold 37px  (55 × 0.681 scale)
+    Quote    — Be Vietnam Pro Medium 24px     (35 × 0.681 scale)
+*/
+
+/* ── Container ──────────────────────────────────────────────────────────────── */
+
+.mfc {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  gap:             28px;
+  width:           344px;
+  font-family:     'Be Vietnam Pro', sans-serif;
+}
+
+/* ── 3-D scene ──────────────────────────────────────────────────────────────── */
+
+.mfc__scene {
+  width:            344px;
+  height:           415px;
+  position:         relative;
+  perspective:      1000px;
+  cursor:           pointer;
+  outline:          none;
+  border-radius:    33px;
+}
+
+.mfc__scene:focus-visible {
+  box-shadow: 0 0 0 3px rgba(49, 187, 225, 0.8);
+}
+
+/* ── Faces shared ───────────────────────────────────────────────────────────── */
+
+.mfc__face {
+  position:         absolute;
+  inset:            0;
+  border-radius:    33px;                            /* Figma 49px × 0.681 */
+  border:           1.23px solid rgba(255, 255, 255, 0.3); /* Figma exact */
+  overflow:         hidden;
+  display:          flex;
+  flex-direction:   column;
+  padding:          20px 24px 14px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition:       transform 650ms cubic-bezier(0.4, 0, 0.2, 1); /* animation.easing.default */
+}
+
+/* Gradient base — same both faces */
+.mfc__face::before {
+  content:  '';
+  position: absolute;
+  inset:    0;
+  z-index:  0;
+  background: linear-gradient(180deg,
+    #1e1a2c 19.9%,
+    #341f42 103.7%,
+    #51314c 110.5%
+  );
+  border-radius: inherit;
+}
+
+/* Tint overlay — different per face */
+.mfc__face::after {
+  content:  '';
+  position: absolute;
+  inset:    0;
+  z-index:  1;
+  border-radius: inherit;
+}
+
+/* ── Front (Myth) ───────────────────────────────────────────────────────────── */
+
+.mfc__face--front {
+  box-shadow: 0 4px 4px 15px rgba(245, 16, 16, 0.1); /* Figma exact */
+  transform:  rotateY(0deg);
+}
+
+.mfc__scene--flipped .mfc__face--front {
+  transform: rotateY(-180deg);
+}
+
+.mfc__face--front::after {
+  background: rgba(60, 37, 37, 0.5); /* Figma exact — red tint */
+}
+
+/* ── Back (Truth) ───────────────────────────────────────────────────────────── */
+
+.mfc__face--back {
+  box-shadow: 0 4px 4px 15px rgba(142, 245, 16, 0.1); /* Figma exact */
+  transform:  rotateY(180deg);
+}
+
+.mfc__scene--flipped .mfc__face--back {
+  transform: rotateY(0deg);
+}
+
+.mfc__face--back::after {
+  background: rgba(37, 60, 38, 0.4); /* Figma exact — green tint */
+}
+
+/* ── Face content — above layers ────────────────────────────────────────────── */
+
+.mfc__face-header,
+.mfc__cat-wrap,
+.mfc__quote,
+.mfc__hint {
+  position: relative;
+  z-index:  2;
+}
+
+/* ── Header row (icon + label) ──────────────────────────────────────────────── */
+
+.mfc__face-header {
+  display:     flex;
+  align-items: center;
+  gap:         10px;
+  margin-bottom: 4px;
+}
+
+.mfc__icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.mfc__label {
+  font-size:   30px;                /* Figma 55px × 0.527 ≈ 30px — adjusted for readability */
+  font-weight: 800;                 /* ExtraBold */
+  line-height: 1;
+  color:       #ff7f7f;             /* Figma exact */
+}
+
+.mfc__label--truth {
+  font-weight: 700;                 /* Bold on truth */
+}
+
+/* ── Cat image ──────────────────────────────────────────────────────────────── */
+
+.mfc__cat-wrap {
+  flex:            1;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  min-height:      0;
+  overflow:        hidden;
+}
+
+.mfc__cat {
+  max-height:     180px;
+  max-width:      160px;
+  object-fit:     contain;
+  image-rendering: pixelated;
+  transform:      scaleY(-1) rotate(180deg);  /* Figma -scale-y-100 rotate-180 */
+}
+
+/* ── Quote text ─────────────────────────────────────────────────────────────── */
+
+.mfc__quote {
+  font-size:   18px;                /* Figma 35px × 0.527 — adjusted for readability */
+  font-weight: 500;                 /* Medium */
+  color:       #ffffff;
+  line-height: 1.45;
+  margin:      8px 0 4px;
+}
+
+/* ── Hint text ──────────────────────────────────────────────────────────────── */
+
+.mfc__hint {
+  font-size:   11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color:       rgba(255, 255, 255, 0.3);
+  text-align:  center;
+}
+
+/* ── Dots ───────────────────────────────────────────────────────────────────── */
+
+.mfc__dots {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             10px;
+}
+
+.mfc__dot {
+  width:        13px;              /* Figma 40.5px × 0.527 ≈ 21px — sized down for density */
+  height:       13px;
+  border-radius: 50%;
+  border:       none;
+  cursor:       pointer;
+  background:   rgba(255, 255, 255, 0.3);
+  padding:      0;
+  transition:   background 150ms ease, transform 150ms ease;
+}
+
+.mfc__dot--active {
+  background: #31bbe1;             /* colors.accent.teal */
+  transform:  scale(1.15);
+}
+
+.mfc__dot:focus-visible {
+  outline:        2px solid rgba(49, 187, 225, 0.8);
+  outline-offset: 2px;
+}
