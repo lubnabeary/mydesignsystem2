@@ -1,0 +1,338 @@
+.bsc {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #ffffff;
+  text-align: left;
+}
+
+/* ── Page sections ─────────────────────────────────────────────────────────── */
+
+.bsc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding: 56px 0 96px;
+}
+
+.bsc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.bsc-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bsc-section-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.bsc-section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.bsc-section-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Pattern groups ─────────────────────────────────────────────────────────── */
+
+.bsc-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bsc-group-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.bsc-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.bsc-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Token chips ──────────────────────────────────────────────────────────── */
+
+.bsc-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bsc-token {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.bsc-token-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bsc-token-name {
+  font-weight: 600;
+  color: #7eb5d7;
+  font-family: ui-monospace, monospace;
+}
+
+.bsc-token-value {
+  color: rgba(255, 255, 255, 0.4);
+  font-family: ui-monospace, monospace;
+}
+
+/* ── State demo ──────────────────────────────────────────────────────────── */
+
+.bsc-state-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.bsc-state-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.bsc-state-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Props API table ─────────────────────────────────────────────────────── */
+
+.bsc-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bsc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.bsc-table th {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+.bsc-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.bsc-table tr:last-child td {
+  border-bottom: none;
+}
+
+.bsc-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.bsc-table code {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #7eb5d7;
+}
+
+.bsc-table .bsc-required {
+  color: #dc3a3a;
+  font-weight: 700;
+}
+
+/* ── Playground ──────────────────────────────────────────────────────────── */
+
+.bsc-playground {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 24px;
+  align-items: start;
+}
+
+.bsc-playground-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bsc-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 32px;
+}
+
+.bsc-code-block {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.bsc-code-block .token-keyword  { color: #7eb5d7; }
+.bsc-code-block .token-prop     { color: #ff7c2b; }
+.bsc-code-block .token-string   { color: #31bbe1; }
+.bsc-code-block .token-tag      { color: rgba(255,255,255,0.6); }
+
+.bsc-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+.bsc-controls-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0 0 4px;
+}
+
+.bsc-control {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bsc-control label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.bsc-control select,
+.bsc-control input[type='text'] {
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 13px;
+  outline: none;
+  appearance: auto;
+  transition: border-color 150ms ease;
+}
+
+.bsc-control select:focus,
+.bsc-control input[type='text']:focus {
+  border-color: rgba(49, 187, 225, 0.6);
+}
+
+.bsc-control-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.bsc-control-row input[type='checkbox'] {
+  accent-color: #31bbe1;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.bsc-control-row span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Code snippets ────────────────────────────────────────────────────────── */
+
+.bsc-snippets {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bsc-snippet {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bsc-snippet-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 720px) {
+  .bsc-playground {
+    grid-template-columns: 1fr;
+  }
+}

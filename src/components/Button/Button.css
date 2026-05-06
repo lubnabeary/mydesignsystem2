@@ -1,0 +1,254 @@
+/*
+  Button component
+  Tokens: src/styles/design-tokens.ts
+  Figma:  https://www.figma.com/design/GiWAOYZ4BamCKOXSL6PslJ/D3C-FINAL?node-id=2019-3818
+
+  Variants : primary | secondary | ghost | destructive | link
+  Sizes    : sm | md | lg | xl
+  Shapes   : rounded | pill | square
+*/
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+
+.btn {
+  /* Slot variables — overridden by variant/size/shape modifiers */
+  --_bg:           transparent;
+  --_color:        #ffffff;
+  --_border:       transparent;
+  --_shadow:       none;
+  --_radius:       37px;      /* borderRadius.button */
+  --_height:       40px;
+  --_px:           20px;
+  --_font-size:    15px;
+  --_font-weight:  700;       /* typography.fontWeight.bold */
+  --_icon-size:    16px;
+  --_gap:          8px;
+  --_transition:
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), /* animation.duration.base / easing.default */
+    border-color     150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       150ms cubic-bezier(0.4, 0, 0.2, 1),
+    color            150ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity          150ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform        100ms cubic-bezier(0.4, 0, 0.2, 1); /* animation.duration.fast */
+
+  display:          inline-flex;
+  align-items:      center;
+  justify-content:  center;
+  gap:              var(--_gap);
+  height:           var(--_height);
+  padding:          0 var(--_px);
+  background:       var(--_bg);
+  color:            var(--_color);
+  border:           1.5px solid var(--_border);
+  border-radius:    var(--_radius);
+  box-shadow:       var(--_shadow);
+  font-family:      'Be Vietnam Pro', sans-serif; /* typography.fontFamily.primary */
+  font-size:        var(--_font-size);
+  font-weight:      var(--_font-weight);
+  letter-spacing:   -0.02em;
+  line-height:      1;
+  text-decoration:  none;
+  cursor:           pointer;
+  white-space:      nowrap;
+  user-select:      none;
+  transition:       var(--_transition);
+  outline:          none;
+  box-sizing:       border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Variants ──────────────────────────────────────────────────────────────── */
+
+/* Primary — teal fill, from Figma Explore button
+   Token: colors.accent.teal (rgba 49,187,225 at 0.69 opacity) */
+.btn--primary {
+  --_bg:     rgba(49, 187, 225, 0.69);
+  --_border: transparent;
+  --_shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.15); /* shadows.card */
+}
+.btn--primary:not(:disabled):not(.btn--loading):hover {
+  background: rgba(49, 187, 225, 0.85);
+  box-shadow: 0px 5px 12px 0px rgba(0, 0, 0, 0.25); /* shadows.nav */
+  transform:  translateY(-1px);
+}
+.btn--primary:not(:disabled):not(.btn--loading):active {
+  background: rgba(49, 187, 225, 0.95);
+  box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, 0.15);
+  transform:  translateY(0);
+}
+
+/* Secondary — outlined teal
+   Token: colors.accent.blue for text, colors.accent.teal at 50% for border */
+.btn--secondary {
+  --_color:  #7eb5d7; /* colors.accent.blue */
+  --_border: rgba(49, 187, 225, 0.5);
+}
+.btn--secondary:not(:disabled):not(.btn--loading):hover {
+  background:   rgba(49, 187, 225, 0.08);
+  border-color: rgba(49, 187, 225, 0.8);
+  color:        #31bbe1;
+}
+.btn--secondary:not(:disabled):not(.btn--loading):active {
+  background:   rgba(49, 187, 225, 0.12);
+  border-color: rgba(49, 187, 225, 1);
+}
+
+/* Ghost — no background, white text */
+.btn--ghost {
+  --_color:  rgba(255, 255, 255, 0.75);
+  --_border: transparent;
+}
+.btn--ghost:not(:disabled):not(.btn--loading):hover {
+  background: rgba(255, 255, 255, 0.08);
+  color:      #ffffff;
+}
+.btn--ghost:not(:disabled):not(.btn--loading):active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Destructive — red fill
+   Token: colors.state.destructive (#dc3a3a) */
+.btn--destructive {
+  --_bg:     rgba(220, 58, 58, 0.9);
+  --_border: transparent;
+  --_shadow: 0px 3px 8px 0px rgba(220, 58, 58, 0.25);
+}
+.btn--destructive:not(:disabled):not(.btn--loading):hover {
+  background: rgba(220, 58, 58, 1);
+  box-shadow: 0px 5px 12px 0px rgba(220, 58, 58, 0.35);
+  transform:  translateY(-1px);
+}
+.btn--destructive:not(:disabled):not(.btn--loading):active {
+  background: rgba(200, 50, 50, 1);
+  box-shadow: 0px 3px 8px 0px rgba(220, 58, 58, 0.25);
+  transform:  translateY(0);
+}
+
+/* Link — text-only, teal
+   Token: colors.accent.blue for default, colors.accent.teal for hover */
+.btn--link {
+  --_color:  #7eb5d7; /* colors.accent.blue */
+  --_px:     4px;
+
+  height:      auto;
+  font-weight: 500; /* typography.fontWeight.medium */
+  text-underline-offset: 3px;
+}
+.btn--link:not(:disabled):not(.btn--loading):hover {
+  color:           #31bbe1;
+  text-decoration: underline;
+}
+.btn--link:not(:disabled):not(.btn--loading):active {
+  color: rgba(49, 187, 225, 0.7);
+}
+
+/* ── Sizes ─────────────────────────────────────────────────────────────────── */
+
+.btn--sm {
+  --_height:    32px;
+  --_px:        12px;
+  --_font-size: 13px;
+  --_icon-size: 14px;
+  --_gap:       6px;
+}
+
+/* md is the base — values already set above */
+
+.btn--lg {
+  --_height:    48px;
+  --_px:        24px;
+  --_font-size: 17px;
+  --_icon-size: 18px;
+  --_gap:       8px;
+}
+
+.btn--xl {
+  --_height:    58px;  /* matches Figma Explore button height */
+  --_px:        32px;
+  --_font-size: 20px;
+  --_icon-size: 20px;
+  --_gap:       10px;
+}
+
+/* ── Shapes ────────────────────────────────────────────────────────────────── */
+
+.btn--shape-rounded {
+  --_radius: 37px;    /* borderRadius.button */
+}
+
+.btn--shape-pill {
+  --_radius: 9999px;  /* borderRadius.full — matches CONTACT button */
+}
+
+.btn--shape-square {
+  --_radius: 4px;     /* borderRadius.sm */
+}
+
+/* ── Disabled & Loading ────────────────────────────────────────────────────── */
+
+.btn:disabled,
+.btn[aria-disabled='true']:not(.btn--loading) {
+  opacity:        0.4;
+  cursor:         not-allowed;
+  pointer-events: none;
+}
+
+.btn--loading {
+  cursor:         wait;
+  pointer-events: none;
+  opacity:        0.8;
+}
+
+/* ── Focus ring — WCAG 2.1 AA ────────────────────────────────────────────── */
+
+.btn:focus-visible {
+  outline:        2px solid rgba(49, 187, 225, 0.8); /* colors.accent.teal at 80% */
+  outline-offset: 3px;
+}
+
+/* ── Full width ─────────────────────────────────────────────────────────────── */
+
+.btn--full {
+  width: 100%;
+}
+
+/* ── Icon-only (square, no horizontal padding) ────────────────────────────── */
+
+.btn--icon-only        { --_px: 0px; }
+.btn--icon-only.btn--sm  { width: 32px; }
+.btn--icon-only.btn--md  { width: 40px; }
+.btn--icon-only.btn--lg  { width: 48px; }
+.btn--icon-only.btn--xl  { width: 58px; }
+
+/* ── Sub-elements ────────────────────────────────────────────────────────────── */
+
+.btn__label {
+  position: relative;
+  z-index:  1;
+}
+
+.btn__icon {
+  display:     inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size:   var(--_icon-size);
+  line-height: 1;
+}
+
+.btn__icon svg,
+.btn__spinner {
+  display: block;
+  width:   var(--_icon-size);
+  height:  var(--_icon-size);
+}
+
+/* ── Loading spinner ──────────────────────────────────────────────────────── */
+
+.btn__spinner {
+  flex-shrink: 0;
+  animation:   _btn-spin 750ms linear infinite; /* animation.duration.spinner */
+}
+
+@keyframes _btn-spin {
+  to { transform: rotate(360deg); }
+}

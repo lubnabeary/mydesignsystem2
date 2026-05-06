@@ -1,0 +1,333 @@
+.sg {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #1a1229;
+  color: #ffffff;
+  min-height: 100vh;
+  text-align: left;
+}
+
+/* ── Page nav ─────────────────────────────────────────────────────────────── */
+
+.sg-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #1a1229;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 56px;
+}
+
+.sg-nav-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7eb5d7;
+  margin-right: auto;
+}
+
+.sg-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.sg-nav a:hover {
+  color: #ffffff;
+}
+
+/* ── Page body ────────────────────────────────────────────────────────────── */
+
+.sg-body {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 64px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+}
+
+/* ── Section ──────────────────────────────────────────────────────────────── */
+
+.sg-section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.sg-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sg-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.sg-section-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.85px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.sg-section-desc {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+/* ── Token group ──────────────────────────────────────────────────────────── */
+
+.sg-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sg-group-name {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── Colors ───────────────────────────────────────────────────────────────── */
+
+.sg-color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.sg-swatch {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sg-swatch-color {
+  height: 72px;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 8px;
+}
+
+.sg-swatch-check {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.sg-swatch-info {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sg-swatch-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.sg-swatch-value {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: ui-monospace, monospace;
+}
+
+/* ── Typography ───────────────────────────────────────────────────────────── */
+
+.sg-type-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sg-type-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: baseline;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sg-type-row:last-child {
+  border-bottom: none;
+}
+
+.sg-type-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.sg-type-token {
+  font-size: 12px;
+  font-weight: 700;
+  color: #7eb5d7;
+  font-family: ui-monospace, monospace;
+}
+
+.sg-type-detail {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.4;
+}
+
+.sg-type-sample {
+  color: #ffffff;
+  line-height: normal;
+  word-break: break-word;
+}
+
+/* ── Spacing ──────────────────────────────────────────────────────────────── */
+
+.sg-spacing-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sg-spacing-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 80px;
+  align-items: center;
+  gap: 16px;
+}
+
+.sg-spacing-token {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: ui-monospace, monospace;
+  text-align: right;
+}
+
+.sg-spacing-bar-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.sg-spacing-bar {
+  height: 20px;
+  background: #31bbe1;
+  border-radius: 3px;
+  opacity: 0.7;
+  min-width: 2px;
+}
+
+.sg-spacing-val {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: ui-monospace, monospace;
+}
+
+/* ── Border Radius ────────────────────────────────────────────────────────── */
+
+.sg-radius-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.sg-radius-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.sg-radius-shape {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #31bbe1, #7eb5d7);
+}
+
+.sg-radius-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sg-radius-token {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.sg-radius-value {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: ui-monospace, monospace;
+}
+
+/* ── Shadows ──────────────────────────────────────────────────────────────── */
+
+.sg-shadow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.sg-shadow-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 24px;
+  background: #1e1a2c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+.sg-shadow-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sg-shadow-token {
+  font-size: 13px;
+  font-weight: 700;
+  color: #7eb5d7;
+}
+
+.sg-shadow-value {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: ui-monospace, monospace;
+  word-break: break-all;
+  line-height: 1.5;
+}

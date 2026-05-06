@@ -1,0 +1,162 @@
+.comp {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #1a1229;
+  color: #ffffff;
+  min-height: 100vh;
+  text-align: left;
+}
+
+/* ── Top nav ──────────────────────────────────────────────────────────────── */
+
+.comp-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #1a1229;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  height: 56px;
+}
+
+.comp-nav-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7eb5d7;
+  margin-right: auto;
+}
+
+.comp-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.comp-nav a:hover {
+  color: #ffffff;
+}
+
+/* ── Component tab bar ────────────────────────────────────────────────────── */
+
+.comp-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #1a1229;
+  position: sticky;
+  top: 56px;
+  z-index: 9;
+  overflow-x: auto;
+}
+
+.comp-tab {
+  position: relative;
+  padding: 14px 20px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s;
+  white-space: nowrap;
+  outline: none;
+}
+
+.comp-tab:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.comp-tab--active {
+  color: #ffffff;
+}
+
+.comp-tab--active::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: -1px;
+  height: 2px;
+  background: #31bbe1;
+  border-radius: 1px 1px 0 0;
+}
+
+.comp-tab:focus-visible {
+  outline: 2px solid rgba(49, 187, 225, 0.6);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+/* ── Component header ─────────────────────────────────────────────────────── */
+
+.comp-header {
+  padding: 48px 40px 0;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comp-header-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.comp-header-title {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.comp-header-desc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.comp-header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.comp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: ui-monospace, monospace;
+}
+
+/* ── Content ──────────────────────────────────────────────────────────────── */
+
+.comp-content {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
