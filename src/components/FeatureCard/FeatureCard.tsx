@@ -24,32 +24,25 @@
 import { Link } from 'react-router-dom';
 import './FeatureCard.css';
 import type { FeatureCardProps } from './FeatureCard.types';
-import { Button } from '../Button';
 
 const VARIANT_DEFAULTS = {
   awareness: {
-    title:       'Awareness',
-    subtitle:    'Understanding anxiety & GAD',
-    icon:        '/images/icon-academic.png',
-    href:        '/awareness',
-    accentColor: 'rgba(127, 223, 255, 0.12)',
-    accentBorder: 'rgba(127, 223, 255, 0.25)',
+    title:    'Awareness',
+    subtitle: 'Understanding anxiety & GAD',
+    icon:     '/images/icon-academic.png',
+    href:     '/awareness',
   },
   moodTracker: {
-    title:       'Mood Tracker',
-    subtitle:    'Track your daily mental wellness',
-    icon:        '/images/icon-financial.png',
-    href:        '/mood-tracker',
-    accentColor: 'rgba(255, 143, 143, 0.1)',
-    accentBorder: 'rgba(255, 143, 143, 0.22)',
+    title:    'Mood Tracker',
+    subtitle: 'Track your daily mental wellness',
+    icon:     '/images/icon-financial.png',
+    href:     '/mood-tracker',
   },
   studentExperiences: {
-    title:       'Student Experiences',
-    subtitle:    'Shared journeys & community',
-    icon:        '/images/icon-social.png',
-    href:        '/student-experiences',
-    accentColor: 'rgba(49, 187, 225, 0.1)',
-    accentBorder: 'rgba(49, 187, 225, 0.22)',
+    title:    'Student Experiences',
+    subtitle: 'Shared journeys & community',
+    icon:     '/images/icon-social.png',
+    href:     '/student-experiences',
   },
 } as const;
 
@@ -58,8 +51,6 @@ export function FeatureCard({
   title,
   subtitle,
   icon,
-  description,
-  onExplore,
   href,
   className,
 }: FeatureCardProps) {
@@ -71,41 +62,13 @@ export function FeatureCard({
   const resolvedHref     = href     ?? defaults.href;
 
   const card = (
-    <article
-      className={`fc fc--${variant}${className ? ` ${className}` : ''}`}
-      style={{
-        '--fc-accent':        defaults.accentColor,
-        '--fc-accent-border': defaults.accentBorder,
-      } as React.CSSProperties}
-    >
-      {/* Icon area */}
+    <article className={`fc fc--${variant}${className ? ` ${className}` : ''}`}>
       <div className="fc__icon-wrap">
         <img src={resolvedIcon} alt="" aria-hidden="true" className="fc__icon" />
       </div>
-
-      {/* Text */}
       <div className="fc__body">
         <h3 className="fc__title">{resolvedTitle}</h3>
         <p className="fc__subtitle">{resolvedSubtitle}</p>
-        {description && <p className="fc__desc">{description}</p>}
-      </div>
-
-      {/* CTA */}
-      <div className="fc__footer">
-        <Button
-          variant="secondary"
-          size="sm"
-          rightIcon={
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12,5 19,12 12,19"/>
-            </svg>
-          }
-          onClick={onExplore}
-          tabIndex={-1}
-        >
-          Explore
-        </Button>
       </div>
     </article>
   );
