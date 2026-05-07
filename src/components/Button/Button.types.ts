@@ -1,6 +1,6 @@
 import type React from 'react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive' | 'link';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'glass' | 'destructive' | 'link';
 export type ButtonSize    = 'sm' | 'md' | 'lg' | 'xl';
 export type ButtonShape   = 'rounded' | 'pill' | 'square';
 

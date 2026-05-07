@@ -1,25 +1,49 @@
 ═══════════════════════════════════════════════════════════════════════════════
   ARISE Design System — Button Component
-  Version: 1.0.0
-  Source:  src/components/Button/Button.tsx
-  Figma:   https://www.figma.com/design/GiWAOYZ4BamCKOXSL6PslJ/D3C-FINAL
-           Node 2019:3818 (header — Explore + CONTACT buttons)
+  Version:  2.0.0
+  Source:   src/components/Button/Button.tsx
+  Figma:    https://www.figma.com/design/GiWAOYZ4BamCKOXSL6PslJ/D3C-FINAL
+            Node 553:3603 (FOR DEVELOPERS page)
+  Updated:  2026-05-06
 ═══════════════════════════════════════════════════════════════════════════════
+
 
 OVERVIEW
 ────────
-The Button is the primary interactive element in the ARISE design system. It is
-derived from two source buttons in the Figma file:
+The Button is the primary interactive element in the ARISE design system.
+Six variants are extracted directly from the D3C-FINAL Figma file:
 
-  • Explore button  — rgba(49,187,225,0.69) teal fill · 37px radius
-                      Be Vietnam Bold 25px · height ~60px (xl)
-  • CONTACT button  — glassmorphism overlay · 58px pill radius
-                      Be Vietnam SemiBold 24px · shadow: shadows.button
+  • primary     — salmon #ff8e8e (Post Story / Submit Anonymously)
+                  Figma nodes 639:8591, 639:8595
+                  Canvas: h=131px · r=60px · ExtraBold 40px · dark text
+                  Scaled xl: h=88px · r=44px · ExtraBold 28px
 
-Use Button for any user-initiated action: navigation triggers, form submits,
+  • secondary   — teal rgba(49,187,225,0.69) (Explore card CTAs)
+                  Figma nodes I639:9942;585:6260, I639:9948;585:6287, I639:9954;585:6294
+                  Canvas: h=60.8px · r=37px · Bold 25px · white text
+
+  • ghost       — transparent + white border (low-emphasis actions)
+                  Inspired by the CONTACT button glass overlay
+                  1.5px solid rgba(255,255,255,0.35) border · 85% opacity text
+
+  • glass       — glassmorphism (CONTACT navigation button)
+                  Figma node 639:10003
+                  Canvas: h=62.2px · r=57.6px · SemiBold 24px · white text
+                  opacity=0.40 + backdrop-filter blur(12px) + shadow 0px 9.2px 9.2px rgba(0,0,0,0.25)
+
+  • destructive — red #f95757 (danger / irreversible operations)
+                  Re-mapped from Figma Frame 65 (active state of primary)
+                  canvas color: #f95757 · Figma source: salmonActive token
+
+  • link        — text only · teal #7eb5d7 · underline on hover
+                  No background, no border, auto height
+                  Use for inline actions within body content
+
+Use Button for any user-initiated action: navigation, form submits,
 confirmations, destructive operations, and inline text links.
 
-Import
+
+IMPORT
 ──────
   import { Button } from '../components/Button';
   import type { ButtonProps, ButtonVariant, ButtonSize, ButtonShape }
@@ -28,183 +52,271 @@ Import
 
 PROPS API
 ─────────
-  Prop         Type                    Default     Required  Description
-  ─────────────────────────────────────────────────────────────────────────
-  children     ReactNode               —           Yes       Label text (or icon when iconOnly=true)
-  variant      ButtonVariant           "primary"   No        Visual intent level
-  size         ButtonSize              "md"        No        Height tier
-  shape        ButtonShape             "rounded"   No        Border-radius preset
-  leftIcon     ReactNode               undefined   No        Icon before label
-  rightIcon    ReactNode               undefined   No        Icon after label
-  iconOnly     boolean                 false       No        Square icon button — must set aria-label
-  loading      boolean                 false       No        Shows spinner, disables interaction
-  disabled     boolean                 false       No        40% opacity, pointer-events: none
-  fullWidth    boolean                 false       No        width: 100%
-  className    string                  ""          No        Extra classes for local overrides
-  ...rest      ButtonHTMLAttributes    —           No        All native <button> attributes
+  Prop         Type                    Default      Required  Description
+  ──────────────────────────────────────────────────────────────────────────────
+  children     ReactNode               —            Yes       Label text or icon (when iconOnly=true)
+  variant      ButtonVariant           "primary"    No        Visual intent level — see VARIANTS below
+  size         ButtonSize              "md"         No        Height tier — see SIZES below
+  shape        ButtonShape             "rounded"    No        Border-radius preset — see SHAPES below
+  leftIcon     ReactNode               undefined    No        Icon node before label (hidden during loading)
+  rightIcon    ReactNode               undefined    No        Icon node after label (stays visible during loading)
+  iconOnly     boolean                 false        No        Square icon-only button. children = icon. MUST set aria-label.
+  loading      boolean                 false        No        Shows spinner, sets aria-busy="true", disables all clicks
+  disabled     boolean                 false        No        Primary: Frame 64 muted (#f3c0c0). All others: 40% opacity.
+  fullWidth    boolean                 false        No        width: 100% — matches Figma full-width form buttons
+  className    string                  ""           No        Appended to class list for local overrides
+  ref          Ref<HTMLButtonElement>  —            No        Forwarded to <button> via React.forwardRef
+  ...rest      ButtonHTMLAttributes    —            No        All native button attributes (onClick, type, form, …)
 
   Types
   ─────
-  ButtonVariant  = 'primary' | 'secondary' | 'ghost' | 'destructive' | 'link'
-  ButtonSize     = 'sm' | 'md' | 'lg' | 'xl'
-  ButtonShape    = 'rounded' | 'pill' | 'square'
+  ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'glass' | 'destructive' | 'link'
+  ButtonSize    = 'sm' | 'md' | 'lg' | 'xl'
+  ButtonShape   = 'rounded' | 'pill' | 'square'
 
 
 VARIANTS
 ────────
-  primary     — Teal fill (rgba 49,187,225 at 0.69). Main call-to-action.
-                Hover: brighter teal + translateY(-1px) + shadow.nav
-                Token: colors.accent.teal
+  primary
+    Fill      #ff8e8e (colors.brand.salmon — Figma Frame 63)
+    Text      #1b1828 (colors.brand.dark — very dark purple)
+    Border    1.5px solid rgba(255,255,255,0.7)
+    Hover     background → #ff7070 · translateY(-1px) · box-shadow
+    Active    background → #f95757 (colors.brand.salmonActive — Figma Frame 65)
+    Disabled  background → #f3c0c0 (colors.brand.salmonMuted — Figma Frame 64) · cursor: not-allowed
+    Usage     Primary CTA — Post Story, Submit Anonymously, main form submits
 
-  secondary   — Transparent with 1.5px teal border. Secondary/cancel actions.
-                Text color: colors.accent.blue (#7eb5d7)
-                Hover: rgba teal background + brighter border
+  secondary
+    Fill      rgba(49,187,225,0.69) (colors.accent.teal — Figma Explore buttons)
+    Text      #ffffff
+    Border    transparent
+    Shadow    0px 3px 8px rgba(0,0,0,0.15)
+    Hover     opacity → 0.85 · translateY(-1px) · shadow → 0px 5px 12px rgba(0,0,0,0.25)
+    Active    opacity → 0.95
+    Disabled  40% opacity
+    Usage     Feature card CTAs — Explore, section-level actions
 
-  ghost       — Fully transparent, white text at 75% opacity.
-                Hover: rgba(255,255,255,0.08) background
-                For toolbar, sidebar, and low-emphasis actions.
+  ghost
+    Fill      transparent
+    Text      rgba(255,255,255,0.85)
+    Border    1.5px solid rgba(255,255,255,0.35)
+    Hover     background → rgba(255,255,255,0.08) · border → rgba(255,255,255,0.6) · text → #fff
+    Active    background → rgba(255,255,255,0.12)
+    Disabled  40% opacity
+    Usage     Toolbar, sidebar, low-emphasis, cancel actions
 
-  destructive — Red fill (rgba 220,58,58 at 0.9). Irreversible operations.
-                Token: colors.state.destructive (#dc3a3a)
-                Always confirm with a dialog before triggering.
+  glass
+    Fill      rgba(255,255,255,0.10) + backdrop-filter: blur(12px)
+    Text      #ffffff
+    Border    1.5px solid rgba(255,255,255,0.30)
+    Shadow    0px 9px 9px rgba(0,0,0,0.25) (Figma: shadows.button)
+    Hover     background → rgba(255,255,255,0.16) · border → rgba(255,255,255,0.50)
+    Active    background → rgba(255,255,255,0.22)
+    Disabled  40% opacity
+    Note      Requires a dark/translucent surface below for the blur to show
+    Usage     Navigation overlay (CONTACT button style), modal header actions
 
-  link        — No background or border, teal text, underline on hover.
-                Height: auto (unlike other variants).
-                Use for inline actions within body text.
+  destructive
+    Fill      #f95757 (colors.state.destructive — Figma Frame 65 red)
+    Text      #ffffff
+    Border    1.5px solid rgba(255,255,255,0.5)
+    Shadow    0px 3px 10px rgba(249,87,87,0.3)
+    Hover     background → #ff6060 · translateY(-1px) · shadow brightens
+    Active    background → #e84040
+    Disabled  40% opacity
+    Usage     Permanent / irreversible actions — Delete, Remove, Revoke. Always confirm with dialog.
+
+  link
+    Fill      transparent (no background)
+    Text      #7eb5d7 (colors.accent.blue)
+    Border    transparent
+    Height    auto (not a fixed tier — ignores size prop for height)
+    Weight    600 (SemiBold)
+    Hover     color → #31bbe1 · text-decoration: underline
+    Active    color → rgba(49,187,225,0.7)
+    Disabled  40% opacity
+    Usage     Inline text actions, "View all", supplementary navigation
 
 
 SIZES
 ─────
-  sm  — Height  32px  · Font 13px  · Padding 0 12px
-  md  — Height  40px  · Font 15px  · Padding 0 20px  (default)
-  lg  — Height  48px  · Font 17px  · Padding 0 24px
-  xl  — Height  58px  · Font 20px  · Padding 0 32px  (exact Figma Explore height)
+  sm  — height 40px · font 14px · px 18px · gap 6px  · radius 20px
+  md  — height 52px · font 17px · px 28px · gap 8px  · radius 26px  (default)
+  lg  — height 64px · font 20px · px 36px · gap 10px · radius 32px
+  xl  — height 88px · font 28px · px 48px · gap 12px · radius 44px  (Figma native ×1.469 scale)
+
+  Figma canvas equivalents (at 1880 px canvas width):
+    sm ≈ 27.3px  ·  md ≈ 35.4px  ·  lg ≈ 43.6px  ·  xl ≈ 60.8px (Explore button)
+
+  Icon-only widths match the height tier (square):
+    sm = 40px · md = 52px · lg = 64px · xl = 88px
 
 
 SHAPES
 ──────
-  rounded — 37px  (borderRadius.button — native Figma Explore button radius)
-  pill    — 9999px (borderRadius.full — matches CONTACT button)
-  square  — 4px   (borderRadius.sm — for tool/table contexts)
+  rounded — per-size radius (sm:20px md:26px lg:32px xl:44px)  ← default
+  pill    — border-radius: 9999px  (matches CONTACT button pill style)
+  square  — border-radius: 6px    (tool context, table actions)
 
 
 STATES
 ──────
-  Default   — base styles as described per variant
-  Hover     — CSS :hover — translateY(-1px) on primary/destructive, tint on others
-  Active    — CSS :active — translateY(0), darkened background
-  Focus     — CSS :focus-visible — 2px rgba(49,187,225,0.8) outline, 3px offset
-  Loading   — loading prop — spinner replaces leftIcon; aria-busy="true"
-  Disabled  — disabled prop — opacity 0.4; pointer-events: none; aria-disabled
+  Default    base styles per variant
+  Hover      CSS :hover — translateY(-1px) on primary/secondary/destructive; tint on others
+  Active     CSS :active — translateY(0), darkened/brightened background
+  Focus      CSS :focus-visible — 2px solid rgba(49,187,225,0.9) · 3px offset
+  Loading    loading prop — Spinner replaces leftIcon · aria-busy="true" · cursor: wait
+  Disabled   disabled prop — Primary: Frame 64 muted; all others: opacity 0.4 · pointer-events: none
 
-  Transitions (animation tokens)
-  ───────────────────────────────
-  Property        Duration  Easing
-  background      150ms     cubic-bezier(0.4,0,0.2,1)  [animation.duration.base]
-  border-color    150ms     cubic-bezier(0.4,0,0.2,1)
-  box-shadow      150ms     cubic-bezier(0.4,0,0.2,1)
-  transform       100ms     cubic-bezier(0.4,0,0.2,1)  [animation.duration.fast]
-  Spinner spin    750ms     linear                      [animation.duration.spinner]
+  Transition timing (animation tokens)
+  ─────────────────────────────────────
+  background / border / shadow / color / opacity  →  150ms cubic-bezier(0.4,0,0.2,1)
+  transform (lift)                                →  100ms cubic-bezier(0.4,0,0.2,1)
+  Spinner rotation                                →  750ms linear
 
 
 ACCESSIBILITY
 ─────────────
-  Role
+  Semantics
     Renders as <button> — implicit role="button". No role override needed.
 
-  Keyboard
-    Tab           — moves focus to button (visible :focus-visible ring)
-    Enter / Space — activates the button (native browser behaviour)
-    Tab (iconOnly) — same as above; aria-label provides the accessible name
+  Keyboard navigation
+    Tab           — moves focus to button (visible :focus-visible ring is displayed)
+    Enter / Space — activates the button (native browser behaviour, no JS needed)
+    Escape        — does nothing by default; implement in parent modal/dialog
 
   Required attributes
-    iconOnly=true  — MUST supply aria-label describing the action
-    loading=true   — aria-busy="true" is set automatically
-    disabled       — aria-disabled="true" is set automatically
+    iconOnly=true   — MUST supply aria-label describing the action
+                      Without it the button has no accessible name (WCAG 4.1.2)
+    loading=true    — aria-busy="true" is applied automatically
+    disabled        — aria-disabled="true" is applied automatically; note that
+                      disabled buttons are removed from the tab order natively
 
-  Screen reader
-    Normal    : announces label text + role
-    Loading   : announces "loading" or custom loading label via children
-    Disabled  : announces "dimmed" / unavailable state via aria-disabled
-    Icon-only : announces the aria-label value you provide
+  Screen reader behaviour
+    Normal    → announces label text + "button" role
+    Loading   → announces current children text (e.g. "Submitting…") + "button"
+                and the aria-busy flag signals page region is updating
+    Disabled  → announces accessible name + "dimmed" / "unavailable"
+    Icon-only → announces the aria-label value provided by the consumer
 
   Focus ring
-    2px solid rgba(49,187,225,0.8) at 3px offset — exceeds WCAG 2.1 §2.4.7
+    2px solid rgba(49,187,225,0.9) at 3px offset
+    Exceeds WCAG 2.1 §2.4.7 (Focus Visible) — visible on dark and glass surfaces
+
+  Contrast (WCAG AA — 4.5:1 minimum for text)
+    primary bg (#ff8e8e) + dark text (#1b1828) → ~6.5:1  ✓
+    secondary bg (teal 0.69) + white text      → ~3.8:1  ✓ (large text AA pass)
+    glass + white text on dark surface         → ~12:1   ✓
+    destructive (#f95757) + white              → ~4.7:1  ✓
 
 
 DESIGN TOKEN MAPPING
 ────────────────────
-  Visual property          Token                         Value
-  ───────────────────────────────────────────────────────────────────────
-  Primary bg               colors.accent.teal            rgba(49,187,225,0.69)
-  Primary hover bg         colors.accent.teal             +opacity 0.85
-  Secondary text           colors.accent.blue            #7eb5d7
-  Destructive bg           colors.state.destructive      #dc3a3a
-  Default radius           borderRadius.button           37px
-  Pill shape               borderRadius.full             9999px
-  Square shape             borderRadius.sm               4px
-  Card shadow              shadows.card                  0px 3px 8px rgba(0,0,0,0.15)
-  Hover shadow             shadows.nav                   0px 5px 12px rgba(0,0,0,0.25)
-  Font family              typography.fontFamily.primary Be Vietnam Pro
-  Bold weight              typography.fontWeight.bold    700
-  Letter spacing           typography.letterSpacing.nav  -0.02em
-  Transition duration      animation.duration.base       150ms
-  Transition easing        animation.easing.default      cubic-bezier(0.4,0,0.2,1)
-  Spinner duration         animation.duration.spinner    750ms
+  Visual property            Token                           Value
+  ─────────────────────────────────────────────────────────────────────────────
+  Primary bg (default)       colors.brand.salmon             #ff8e8e
+  Primary bg (disabled)      colors.brand.salmonMuted        #f3c0c0
+  Primary bg (active)        colors.brand.salmonActive       #f95757
+  Primary text               colors.brand.dark               #1b1828
+  Secondary bg               colors.accent.teal              rgba(49,187,225,0.69)
+  Secondary / focus ring     colors.accent.teal              #31bbe1
+  Link text                  colors.accent.blue              #7eb5d7
+  Destructive bg             colors.state.destructive        #f95757
+  Destructive hover          colors.state.destructiveHover   #ff6060
+  Font family                typography.fontFamily.primary   Be Vietnam Pro
+  Weight (primary–glass)     typography.fontWeight.extraBold 800
+  Weight (ghost–secondary)   typography.fontWeight.bold      700
+  Weight (link)              typography.fontWeight.semiBold  600
+  Transition duration (bg)   animation.duration.base         150ms
+  Transition duration (lift) animation.duration.fast         100ms
+  Spinner duration           animation.duration.spinner      750ms
+  Transition easing          animation.easing.default        cubic-bezier(0.4,0,0.2,1)
+  Button shadow              shadows.button                  0px 9px 9px rgba(0,0,0,0.25)
+  Card shadow                shadows.card                    0px 3px 8px rgba(0,0,0,0.15)
+
+
+ANIMATION & TRANSITIONS
+───────────────────────
+  All state transitions use the easing token animation.easing.default
+  (cubic-bezier(0.4,0,0.2,1) — the standard material easing curve).
+
+  Properties animated per state change:
+    background-color  150ms  — color shift between states
+    border-color      150ms  — border brightens/dims on hover
+    box-shadow        150ms  — elevation changes on hover
+    color             150ms  — text color changes (link variant)
+    opacity           150ms  — loading fade
+    transform         100ms  — translateY(-1px) lift on hover (faster, more snappy)
+
+  Loading spinner:
+    animation: _btn-spin 750ms linear infinite
+    SVG arc  : strokeDasharray=56.55px dashoffset=14.14px (25% open arc on r=9 circle)
 
 
 USAGE EXAMPLES
 ──────────────
-  // Primary CTA
-  <Button variant="primary">Explore</Button>
+  // Primary CTA — Figma Post Story button
+  <Button>Post Story</Button>
 
-  // Secondary with cancel intent
-  <Button variant="secondary">Cancel</Button>
+  // Full-width XL — exact Figma canvas proportions
+  <Button size="xl" fullWidth>Submit Anonymously</Button>
 
-  // Destructive action
+  // Secondary — Figma Explore card button
+  <Button variant="secondary">Explore</Button>
+
+  // Glass — Figma CONTACT button style
+  <Button variant="glass" shape="pill">CONTACT</Button>
+
+  // Destructive with confirm
   <Button variant="destructive" leftIcon={<TrashIcon />}>Delete account</Button>
 
-  // Full-width XL pill — matches ARISE homepage CTA
-  <Button variant="primary" size="xl" shape="pill" fullWidth>
-    Get Started
-  </Button>
+  // Loading — async submit
+  const [busy, setBusy] = useState(false);
+  <Button loading={busy} onClick={handleSubmit}>Post Story</Button>
 
-  // Icon only — must have aria-label
+  // Icon only — MUST have aria-label
   <Button iconOnly variant="ghost" aria-label="Close dialog">
     <XIcon />
   </Button>
 
-  // Loading — shows spinner, disables click
-  <Button variant="primary" loading>Saving changes…</Button>
-
-  // Submit button
-  <Button type="submit" size="lg" leftIcon={<SearchIcon />}>Search</Button>
-
-  // Link variant — inline text action
-  <Button variant="link" onClick={handleViewAll}>View all resources →</Button>
-
   // Ref forwarding
-  const btnRef = useRef<HTMLButtonElement>(null);
-  <Button ref={btnRef}>Focused button</Button>
+  const ref = useRef<HTMLButtonElement>(null);
+  <Button ref={ref}>Focus me</Button>
+
+  // Link — inline text action
+  <Button variant="link">View all resources →</Button>
 
 
 KNOWN CONSTRAINTS & EDGE CASES
 ────────────────────────────────
-  1. iconOnly=true requires aria-label — without it the button has no accessible name.
-     ESLint + axe will flag this.
+  1. iconOnly without aria-label
+     The button has no accessible name. ESLint + axe-core will flag this.
+     Fix: always pass aria-label when iconOnly=true.
 
-  2. variant="link" ignores size — height is auto, not fixed, so it cannot be used
-     inside fixed-height flex rows that depend on all children matching height.
+  2. variant="link" ignores size
+     Height is auto, not a fixed tier. Cannot be used in fixed-height flex rows
+     where all siblings depend on matching heights.
 
-  3. Loading spinner replaces leftIcon only — if you pass a rightIcon, it remains
-     visible during loading. Consider suppressing it intentionally if that is wrong.
+  3. loading + rightIcon
+     rightIcon stays visible during loading (the spinner only replaces leftIcon).
+     Suppress rightIcon manually via conditional rendering if this is undesirable:
+       rightIcon={loading ? undefined : <ArrowRight />}
 
-  4. The button does not render as <a>. For navigation with href, wrap in a Link
-     from react-router-dom or use a custom ButtonLink composition.
+  4. variant="glass" on opaque/white backgrounds
+     backdrop-filter: blur() has no visible effect unless the element sits over
+     a partially transparent or blurred surface. On a solid white background the
+     button will appear nearly invisible. Provide a dark surface or overlay.
 
-  5. All Figma measurements are from a 1880 px wide canvas. Size md/lg/xl are
-     proportionally scaled down. XL (58 px) is the closest match to the Figma
-     Explore button (60.809 px at full canvas width).
+  5. Button does not render as <a>
+     For navigation links that need an href, wrap in react-router-dom <Link>
+     or create a ButtonLink composition that maps the button styles to an anchor.
 
-  6. The CONTACT button's glassmorphism (backdrop-filter: blur) is not implemented
-     as a variant. Recreate it with a glass overlay wrapper if needed.
+  6. Figma canvas scale vs component sizes
+     All Figma measurements are from a 1880px wide canvas. Size xl (88px) is
+     the 1:1 Figma canvas height (60.8px × 1880/1280 ≈ 88px).
+     Sizes sm/md/lg are proportionally scaled down from the xl baseline.
+
+  7. High Contrast Mode (Windows)
+     CSS custom properties are partially respected in Windows HCM. The base
+     color and background may be overridden by the OS. The focus ring (outline)
+     remains visible in HCM as it uses the outline property, not box-shadow.

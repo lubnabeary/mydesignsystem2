@@ -36,41 +36,98 @@ function Section({ id, num, title, desc, children }: {
 // ── 01 — Figma Source ──────────────────────────────────────────────────────
 
 function FigmaSource() {
-  const states = [
-    { label: 'Frame 63 — Default',         bg: colors.brand.salmon,       text: colors.brand.dark, name: 'colors.brand.salmon' },
-    { label: 'Frame 64 — Muted / Disabled', bg: colors.brand.salmonMuted,  text: colors.brand.dark, name: 'colors.brand.salmonMuted' },
-    { label: 'Frame 65 — Active / Pressed', bg: colors.brand.salmonActive, text: '#ffffff',          name: 'colors.brand.salmonActive' },
+  // Extracted from Figma node 585:4704 (RISE homepage) via MCP — 1880px canvas
+  const figmaButtons = [
+    {
+      label:   'Explore (Secondary CTA)',
+      node:    'I639:9942;585:6260',
+      bg:      'rgba(49,187,225,0.69)',
+      text:    '#ffffff',
+      height:  '60.8px',
+      width:   '276.6px',
+      radius:  '37.0px',
+      font:    'Be Vietnam Pro Bold · 25px',
+      token:   'colors.accent.teal',
+      usage:   'Feature card CTAs — Awareness / Mood Tracker / Student Experiences',
+    },
+    {
+      label:   'CONTACT (Glass)',
+      node:    '639:10003',
+      bg:      'rgba(255,255,255,0.40) + blur(12px)',
+      text:    '#ffffff',
+      height:  '62.2px',
+      width:   '198px',
+      radius:  '57.6px',
+      font:    'Be Vietnam Pro SemiBold · 24px',
+      token:   'glassmorphism overlay',
+      usage:   'Navigation header CONTACT button',
+    },
+    {
+      label:   'Post Story (Primary)',
+      node:    '639:8591',
+      bg:      '#ff8e8e',
+      text:    '#1b1828',
+      height:  '131px (at canvas)',
+      width:   'auto',
+      radius:  '60px (at canvas)',
+      font:    'Be Vietnam Pro ExtraBold · 40px',
+      token:   'colors.brand.salmon',
+      usage:   'Student Experiences form submit (Post Story, Submit Anonymously)',
+    },
+  ];
+
+  // Raw Figma measurements at 1880 px canvas width
+  const canvasSpecs = [
+    { key: 'Canvas width',              val: '1880 px' },
+    { key: 'Explore height (canvas)',   val: '60.809 px' },
+    { key: 'CONTACT height (canvas)',   val: '62.163 px' },
+    { key: 'Post Story height (canvas)',val: '131 px' },
+    { key: 'Scale → 1280 px',          val: '× 0.681' },
+    { key: 'Scale → XL (88 px)',        val: '× 1.469 (full canvas)' },
+    { key: 'Nav font (canvas)',         val: '28.3 px Bold · −0.85 px spacing' },
+    { key: 'Card shadow',               val: '0px 3px 7.6px rgba(0,0,0,0.15)' },
   ];
 
   return (
     <Section id="figma" num="01" title="Figma Source"
-      desc="Three component states extracted from D3C-FINAL nodes 639:8591 (Post Story) and 639:8595 (Submit Anonymously).">
-      <div className="bsc-figma-grid">
-        {states.map(s => (
-          <div key={s.label} className="bsc-figma-card">
-            <div className="bsc-figma-label">{s.label}</div>
-            <div className="bsc-figma-preview" style={{ background: s.bg, border: '1px solid rgba(255,255,255,0.5)', borderRadius: 12 }}>
-              <span style={{ fontFamily: "'Be Vietnam Pro', sans-serif", fontWeight: 800, fontSize: 16, color: s.text }}>
-                Post Story
+      desc="Design data extracted from D3C-FINAL via Figma MCP. Node 553:3603 (FOR DEVELOPERS page). Three button types sourced across nodes 639:8591, 639:10003, and I639:9942;585:6260.">
+
+      <div className="bsc-figma-buttons">
+        {figmaButtons.map(b => (
+          <div key={b.label} className="bsc-figma-btn-card">
+            <div className="bsc-figma-btn-preview"
+              style={{ background: b.bg, backdropFilter: b.bg.includes('blur') ? 'blur(12px)' : undefined }}>
+              <span style={{
+                fontFamily: "'Be Vietnam Pro', sans-serif",
+                fontWeight: b.font.includes('Extra') ? 800 : b.font.includes('Semi') ? 600 : 700,
+                fontSize: 14,
+                color: b.text,
+              }}>
+                {b.label.split(' ')[0]}
               </span>
             </div>
-            <div className="bsc-figma-spec">
-              <span className="bsc-mono">{s.name}</span>
-              <span className="bsc-mono" style={{ color: 'rgba(255,255,255,0.35)' }}>{s.bg}</span>
+            <div className="bsc-figma-btn-meta">
+              <span className="bsc-figma-btn-label">{b.label}</span>
+              <span className="bsc-mono" style={{ color: '#7eb5d7', fontSize: 11 }}>node {b.node}</span>
+              <div className="bsc-figma-btn-specs">
+                <span className="bsc-mono">{b.height} × {b.width}</span>
+                <span className="bsc-mono">r: {b.radius}</span>
+                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{b.font}</span>
+                <span className="bsc-mono" style={{ color: 'rgba(255,255,255,0.3)' }}>{b.token}</span>
+                <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', fontStyle: 'italic' }}>{b.usage}</span>
+              </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="bsc-spec-grid">
-        <div className="bsc-spec-item"><span className="bsc-spec-key">Height (canvas)</span><span className="bsc-spec-val">131 px</span></div>
-        <div className="bsc-spec-item"><span className="bsc-spec-key">Border-radius (canvas)</span><span className="bsc-spec-val">60 px</span></div>
-        <div className="bsc-spec-item"><span className="bsc-spec-key">Font</span><span className="bsc-spec-val">Be Vietnam Pro ExtraBold</span></div>
-        <div className="bsc-spec-item"><span className="bsc-spec-key">Font size (canvas)</span><span className="bsc-spec-val">40 px</span></div>
-        <div className="bsc-spec-item"><span className="bsc-spec-key">Text color</span><span className="bsc-spec-val">#1b1828</span></div>
-        <div className="bsc-spec-item"><span className="bsc-spec-key">Border</span><span className="bsc-spec-val">1 px solid white</span></div>
-        <div className="bsc-spec-item"><span className="bsc-spec-key">Canvas width</span><span className="bsc-spec-val">1880 px</span></div>
-        <div className="bsc-spec-item"><span className="bsc-spec-key">Scale factor → 1280 px</span><span className="bsc-spec-val">×0.681</span></div>
+      <div className="bsc-spec-grid" style={{ marginTop: 8 }}>
+        {canvasSpecs.map(s => (
+          <div key={s.key} className="bsc-spec-item">
+            <span className="bsc-spec-key">{s.key}</span>
+            <span className="bsc-spec-val">{s.val}</span>
+          </div>
+        ))}
       </div>
     </Section>
   );
@@ -81,12 +138,13 @@ function FigmaSource() {
 function TokenPreview() {
   const colorTokens = [
     { token: 'colors.brand.salmon',       value: colors.brand.salmon,       label: 'Primary default' },
-    { token: 'colors.brand.salmonMuted',  value: colors.brand.salmonMuted,  label: 'Disabled state' },
-    { token: 'colors.brand.salmonActive', value: colors.brand.salmonActive, label: 'Active / destructive' },
+    { token: 'colors.brand.salmonMuted',  value: colors.brand.salmonMuted,  label: 'Primary disabled' },
+    { token: 'colors.brand.salmonActive', value: colors.brand.salmonActive, label: 'Primary active / destructive' },
     { token: 'colors.brand.dark',         value: colors.brand.dark,         label: 'Primary text' },
     { token: 'colors.accent.teal',        value: '#31bbe1',                  label: 'Secondary variant' },
     { token: 'colors.accent.blue',        value: '#7eb5d7',                  label: 'Link variant' },
-    { token: 'colors.text.primary',       value: '#ffffff',                  label: 'Ghost / secondary text' },
+    { token: 'colors.text.primary',       value: '#ffffff',                  label: 'Ghost / glass / secondary text' },
+    { token: 'glass overlay',             value: 'rgba(255,255,255,0.10)',   label: 'Glass variant bg' },
   ];
 
   const typeTokens = [
@@ -97,19 +155,19 @@ function TokenPreview() {
   ];
 
   const spacingTokens = [
-    { token: 'sm — px 18, gap 6',   desc: '40 px height' },
-    { token: 'md — px 28, gap 8',   desc: '52 px height (default)' },
-    { token: 'lg — px 36, gap 10',  desc: '64 px height' },
-    { token: 'xl — px 48, gap 12',  desc: '88 px height (Figma native)' },
+    { token: 'sm — px 18 · gap 6',  desc: 'h: 40px · r: 20px · fs: 14px' },
+    { token: 'md — px 28 · gap 8',  desc: 'h: 52px · r: 26px · fs: 17px  (default)' },
+    { token: 'lg — px 36 · gap 10', desc: 'h: 64px · r: 32px · fs: 20px' },
+    { token: 'xl — px 48 · gap 12', desc: 'h: 88px · r: 44px · fs: 28px  (Figma native)' },
   ];
 
   const radiusTokens = [
-    { token: 'sm radius', value: '20px' },
-    { token: 'md radius', value: '26px' },
-    { token: 'lg radius', value: '32px' },
-    { token: 'xl radius', value: '44px' },
-    { token: 'pill', value: '9999px' },
-    { token: 'square', value: '6px' },
+    { token: 'sm radius',  value: '20px' },
+    { token: 'md radius',  value: '26px' },
+    { token: 'lg radius',  value: '32px' },
+    { token: 'xl radius',  value: '44px' },
+    { token: 'pill',       value: '9999px' },
+    { token: 'square',     value: '6px' },
   ];
 
   const animTokens = [
@@ -130,7 +188,9 @@ function TokenPreview() {
             <div key={t.token} className="bsc-token-card">
               <div className="bsc-token-swatch" style={{
                 background: t.value,
-                border: t.value === '#ffffff' || t.value === colors.brand.dark ? '1px solid rgba(255,255,255,0.2)' : 'none',
+                border: t.value === '#ffffff' || t.value === colors.brand.dark
+                  ? '1px solid rgba(255,255,255,0.2)'
+                  : 'none',
               }} />
               <div className="bsc-token-info">
                 <span className="bsc-mono bsc-token-name">{t.token}</span>
@@ -154,7 +214,7 @@ function TokenPreview() {
               }}>
                 {t.value === '800' ? 'ExtraBold 800 — Post Story'
                  : t.value === '700' ? 'Bold 700 — Explore'
-                 : t.value === '600' ? 'SemiBold 600 — CONTACT'
+                 : t.value === '600' ? 'SemiBold 600 — CONTACT / Link'
                  : t.value}
               </span>
             </div>
@@ -176,7 +236,7 @@ function TokenPreview() {
         </div>
 
         <div className="bsc-subsection">
-          <span className="bsc-sublabel">Border radius per size</span>
+          <span className="bsc-sublabel">Border radius per size &amp; shape</span>
           <div className="bsc-spec-list">
             {radiusTokens.map(t => (
               <div key={t.token} className="bsc-spec-row">
@@ -209,17 +269,22 @@ function TokenPreview() {
 function VariantsSection() {
   return (
     <Section id="variants" num="03" title="All Variants"
-      desc="Primary is the direct Figma button. Secondary uses the teal Explore color. Destructive uses the Figma active state red.">
+      desc="Six variants mapped directly from Figma. Primary and glass are direct 1:1 Figma extractions. Secondary uses the Explore card teal. Destructive uses the Figma active-state red.">
       <div className="bsc-variant-grid">
         {([
-          { v: 'primary',     label: 'Post Story',          note: 'Figma native — #ff8e8e salmon' },
-          { v: 'secondary',   label: 'Explore',             note: 'Teal fill from homepage cards' },
-          { v: 'ghost',       label: 'Skip',                note: 'Transparent + white border' },
-          { v: 'destructive', label: 'Delete Entry',        note: 'Figma Frame 65 — #f95757' },
-          { v: 'link',        label: 'View all resources →', note: 'Text only, inline actions' },
+          { v: 'primary',     label: 'Post Story',           note: 'Figma node 639:8591 — #ff8e8e salmon · dark text' },
+          { v: 'secondary',   label: 'Explore',              note: 'Figma node I639:9942;585:6260 — rgba(49,187,225,0.69) teal' },
+          { v: 'ghost',       label: 'Skip',                 note: 'Transparent + 1.5px white border · 85% opacity text' },
+          { v: 'glass',       label: 'CONTACT',              note: 'Figma node 639:10003 — glassmorphism · backdrop-filter blur(12px)' },
+          { v: 'destructive', label: 'Delete Entry',         note: 'Figma Frame 65 — #f95757 · danger signal' },
+          { v: 'link',        label: 'View all resources →', note: 'Text only · no bg · teal #7eb5d7 · underline on hover' },
         ] as { v: ButtonVariant; label: string; note: string }[]).map(({ v, label, note }) => (
           <div key={v} className="bsc-variant-row">
-            <div className="bsc-variant-demo">
+            <div className="bsc-variant-demo" style={{
+              background: v === 'glass' ? 'rgba(26,18,41,0.8)' : undefined,
+              borderRadius: 8,
+              padding: v === 'glass' ? '8px 12px' : undefined,
+            }}>
               <Button variant={v} size="md">{label}</Button>
             </div>
             <div className="bsc-variant-meta">
@@ -238,14 +303,14 @@ function VariantsSection() {
 function SizesSection() {
   return (
     <Section id="sizes" num="04" title="Size Scale"
-      desc="Scaled from the 131 px Figma canvas height. XL is the closest match to the Figma native button.">
+      desc="Four tiers scaled from Figma canvas measurements (1880 px). XL is the 1:1 Figma canvas height (60.8 px × 1.469 scale = 88 px).">
       <div className="bsc-size-list">
         {([
-          { s: 'sm' as ButtonSize, h: '40px', r: '20px', fs: '14px', px: '18px', note: 'Compact — inline forms' },
-          { s: 'md' as ButtonSize, h: '52px', r: '26px', fs: '17px', px: '28px', note: 'Default — general purpose' },
-          { s: 'lg' as ButtonSize, h: '64px', r: '32px', fs: '20px', px: '36px', note: 'Prominent — section CTAs' },
-          { s: 'xl' as ButtonSize, h: '88px', r: '44px', fs: '28px', px: '48px', note: 'Figma native — hero / form submit' },
-        ]).map(({ s, h, r, fs, px, note }) => (
+          { s: 'sm' as ButtonSize, h: '40px', r: '20px', fs: '14px', px: '18px', figma: '27.3px at canvas', note: 'Compact — inline forms' },
+          { s: 'md' as ButtonSize, h: '52px', r: '26px', fs: '17px', px: '28px', figma: '35.4px at canvas', note: 'Default — general purpose' },
+          { s: 'lg' as ButtonSize, h: '64px', r: '32px', fs: '20px', px: '36px', figma: '43.6px at canvas', note: 'Prominent — section CTAs' },
+          { s: 'xl' as ButtonSize, h: '88px', r: '44px', fs: '28px', px: '48px', figma: '60.8px at canvas ✓', note: 'Figma native — hero / form submit' },
+        ]).map(({ s, h, r, fs, px, figma, note }) => (
           <div key={s} className="bsc-size-row">
             <div className="bsc-size-preview">
               <Button size={s} fullWidth>Post Story</Button>
@@ -254,6 +319,7 @@ function SizesSection() {
               <div className="bsc-size-badge">{s}</div>
               <div className="bsc-size-detail">
                 <span className="bsc-mono">h:{h} · r:{r} · fs:{fs} · px:{px}</span>
+                <span className="bsc-mono" style={{ color: '#31bbe1', fontSize: 11 }}>{figma}</span>
                 <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12 }}>{note}</span>
               </div>
             </div>
@@ -269,17 +335,19 @@ function SizesSection() {
 function StatesSection() {
   return (
     <Section id="states" num="05" title="Interactive States"
-      desc="Hover and Active are CSS-driven — interact with the buttons to see them live. Disabled maps exactly to Figma Frame 64 (#f3c0c0).">
+      desc="Hover and Active are CSS-driven — interact to see them live. Primary disabled maps to Figma Frame 64 (#f3c0c0). Glass uses backdrop-filter blur(12px).">
       <div className="bsc-states-grid">
         {[
-          { label: 'Default',          sub: 'Figma Frame 63 · #ff8e8e',  el: <Button>Post Story</Button> },
-          { label: 'Hover — try it',   sub: 'Brightens toward #ff7070',   el: <Button>Post Story</Button> },
-          { label: 'Active / Pressed', sub: 'Figma Frame 65 · #f95757',  el: <Button>Post Story</Button> },
-          { label: 'Focus (Tab to)',   sub: '2px teal ring, 3px offset',  el: <Button>Post Story</Button> },
-          { label: 'Disabled',         sub: 'Figma Frame 64 · #f3c0c0',  el: <Button disabled>Post Story</Button> },
-          { label: 'Loading',          sub: 'Spinner + aria-busy',        el: <Button loading>Submitting…</Button> },
-          { label: 'Secondary hover',  sub: 'Teal brightens + lift',      el: <Button variant="secondary">Explore</Button> },
-          { label: 'Destructive',      sub: '#f95757 · Figma Frame 65',   el: <Button variant="destructive">Delete</Button> },
+          { label: 'Default',           sub: 'Frame 63 · #ff8e8e salmon',     el: <Button>Post Story</Button> },
+          { label: 'Hover — try it',    sub: 'Brightens → #ff7070 + lift',    el: <Button>Post Story</Button> },
+          { label: 'Active / Pressed',  sub: 'Frame 65 · #f95757 salmonActive',el: <Button>Post Story</Button> },
+          { label: 'Focus (Tab to)',    sub: '2px teal ring · 3px offset',    el: <Button>Post Story</Button> },
+          { label: 'Disabled',          sub: 'Frame 64 · #f3c0c0 salmonMuted', el: <Button disabled>Post Story</Button> },
+          { label: 'Loading',           sub: 'Spinner + aria-busy=true',      el: <Button loading>Submitting…</Button> },
+          { label: 'Secondary hover',   sub: 'Teal brightens + translateY',   el: <Button variant="secondary">Explore</Button> },
+          { label: 'Glass',             sub: 'Glassmorphism + blur(12px)',     el: <div style={{ background: 'rgba(26,18,41,0.85)', borderRadius: 8, padding: '8px 10px' }}><Button variant="glass">CONTACT</Button></div> },
+          { label: 'Destructive',       sub: '#f95757 · danger signal',       el: <Button variant="destructive">Delete</Button> },
+          { label: 'Link',              sub: 'Text only · teal · auto height', el: <Button variant="link">View all →</Button> },
         ].map(({ label, sub, el }) => (
           <div key={label} className="bsc-state-card">
             <div className="bsc-state-label">{label}</div>
@@ -317,6 +385,7 @@ function IconsSection() {
             <Button key="p"  iconOnly variant="primary"     size="lg" aria-label="Submit"><SendIcon /></Button>,
             <Button key="s"  iconOnly variant="secondary"   size="lg" aria-label="Search"><SearchIcon /></Button>,
             <Button key="g"  iconOnly variant="ghost"       size="lg" aria-label="Close"><XIcon /></Button>,
+            <Button key="gl" iconOnly variant="glass"       size="lg" aria-label="Contact"><SendIcon /></Button>,
             <Button key="d"  iconOnly variant="destructive" size="lg" aria-label="Delete"><TrashIcon /></Button>,
           ]},
         { label: 'Icon only — all sizes',
@@ -336,7 +405,63 @@ function IconsSection() {
   );
 }
 
-// ── 07 — Live Playground ───────────────────────────────────────────────────
+// ── 07 — Theme Variations ──────────────────────────────────────────────────
+
+function ThemeSection() {
+  type ThemeId = 'dark' | 'light' | 'contrast';
+  const themes: { id: ThemeId; label: string; bg: string; surface: string; desc: string }[] = [
+    { id: 'dark',     label: 'Dark (Figma native)',  bg: '#1a1229', surface: '#1e1a2c', desc: 'ARISE default — deep purple brand' },
+    { id: 'light',    label: 'Light',               bg: '#f5f5f7', surface: '#ffffff', desc: 'Inverted for light-mode contexts' },
+    { id: 'contrast', label: 'High Contrast',       bg: '#000000', surface: '#111111', desc: 'WCAG AAA accessible — maximum contrast' },
+  ];
+
+  const variantsForTheme: { v: ButtonVariant; label: string }[] = [
+    { v: 'primary',     label: 'Primary' },
+    { v: 'secondary',   label: 'Secondary' },
+    { v: 'ghost',       label: 'Ghost' },
+    { v: 'glass',       label: 'Glass' },
+    { v: 'destructive', label: 'Destructive' },
+    { v: 'link',        label: 'Link' },
+  ];
+
+  return (
+    <Section id="themes" num="07" title="Theme Variations"
+      desc="All six variants rendered across Dark (Figma native), Light, and High Contrast surfaces. The component uses CSS custom properties, making theme overrides straightforward.">
+      <div className="bsc-theme-grid">
+        {themes.map(t => (
+          <div key={t.id} className="bsc-theme-panel" style={{ background: t.bg }}>
+            <div className="bsc-theme-header" style={{ background: t.surface }}>
+              <span className="bsc-theme-label" style={{ color: t.id === 'light' ? '#1a1229' : '#ffffff' }}>{t.label}</span>
+              <span className="bsc-theme-desc" style={{ color: t.id === 'light' ? 'rgba(26,18,41,0.5)' : 'rgba(255,255,255,0.4)' }}>{t.desc}</span>
+            </div>
+            <div className="bsc-theme-body">
+              {variantsForTheme.map(({ v, label }) => (
+                <div key={v} className="bsc-theme-row">
+                  <span className="bsc-mono" style={{ color: t.id === 'light' ? 'rgba(26,18,41,0.45)' : 'rgba(255,255,255,0.3)', fontSize: 11, minWidth: 80 }}>{label}</span>
+                  <Button variant={v} size="sm">{label}</Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="bsc-theme-note">
+        <span className="bsc-sublabel" style={{ display: 'block', marginBottom: 8 }}>CSS override pattern</span>
+        <pre className="bsc-code">{`.my-light-surface .btn--primary {
+  --_bg:     #e07070;   /* darkened salmon for light bg */
+  --_color:  #ffffff;
+}
+.my-light-surface .btn--ghost {
+  --_color:  #1a1229;
+  --_border: rgba(26, 18, 41, 0.35);
+}`}</pre>
+      </div>
+    </Section>
+  );
+}
+
+// ── 08 — Live Playground ───────────────────────────────────────────────────
 
 function Playground() {
   const [variant,  setVariant]  = useState<ButtonVariant>('primary');
@@ -360,17 +485,19 @@ function Playground() {
     full     ? 'fullWidth'                       : null,
   ].filter(Boolean) as string[];
 
-  const short  = attrs.length <= 2;
-  const code   = short
+  const short = attrs.length <= 2;
+  const code  = short
     ? `<Button ${attrs.join(' ')}>${label}</Button>`
     : `<Button\n  ${attrs.join('\n  ')}\n>\n  ${label}\n</Button>`;
 
+  const needsGlassBg = variant === 'glass';
+
   return (
-    <Section id="playground" num="07" title="Live Playground"
+    <Section id="playground" num="08" title="Live Playground"
       desc="Adjust any prop — the preview and code snippet update instantly.">
       <div className="bsc-playground">
         <div className="bsc-play-left">
-          <div className="bsc-preview-box">
+          <div className="bsc-preview-box" style={{ background: needsGlassBg ? 'rgba(26,18,41,0.85)' : undefined }}>
             <Button
               variant={variant} size={size} shape={shape}
               disabled={disabled} loading={loading} fullWidth={full}
@@ -389,7 +516,7 @@ function Playground() {
           <div className="bsc-ctrl">
             <label>variant</label>
             <select value={variant} onChange={e => setVariant(e.target.value as ButtonVariant)}>
-              {(['primary','secondary','ghost','destructive','link'] as ButtonVariant[]).map(v =>
+              {(['primary','secondary','ghost','glass','destructive','link'] as ButtonVariant[]).map(v =>
                 <option key={v} value={v}>{v}</option>)}
             </select>
           </div>
@@ -433,27 +560,27 @@ function Playground() {
   );
 }
 
-// ── 08 — Props API ─────────────────────────────────────────────────────────
+// ── 09 — Props API ─────────────────────────────────────────────────────────
 
 function PropsAPI() {
   const rows = [
     { name:'children',  type:'ReactNode',          def:'—',         req:true,  desc:'Label text. When iconOnly=true, provide the icon node instead.' },
-    { name:'variant',   type:'ButtonVariant',       def:'"primary"', req:false, desc:'primary | secondary | ghost | destructive | link' },
-    { name:'size',      type:'ButtonSize',          def:'"md"',      req:false, desc:'sm(40px) | md(52px) | lg(64px) | xl(88px ≈ Figma)' },
+    { name:'variant',   type:'ButtonVariant',       def:'"primary"', req:false, desc:'primary | secondary | ghost | glass | destructive | link' },
+    { name:'size',      type:'ButtonSize',          def:'"md"',      req:false, desc:'sm(40px) | md(52px) | lg(64px) | xl(88px ≈ Figma canvas)' },
     { name:'shape',     type:'ButtonShape',         def:'"rounded"', req:false, desc:'rounded (per-size radius) | pill (9999px) | square (6px)' },
     { name:'leftIcon',  type:'ReactNode',           def:'undefined', req:false, desc:'Icon before label. Hidden during loading.' },
-    { name:'rightIcon', type:'ReactNode',           def:'undefined', req:false, desc:'Icon after label. Hidden during loading.' },
+    { name:'rightIcon', type:'ReactNode',           def:'undefined', req:false, desc:'Icon after label. Visible during loading — suppress if needed.' },
     { name:'iconOnly',  type:'boolean',             def:'false',     req:false, desc:'Square icon button. children = icon. Must set aria-label.' },
     { name:'loading',   type:'boolean',             def:'false',     req:false, desc:'Shows spinner, sets aria-busy, disables all interaction.' },
-    { name:'disabled',  type:'boolean',             def:'false',     req:false, desc:'Primary: Figma Frame 64 muted color. Others: 40% opacity.' },
+    { name:'disabled',  type:'boolean',             def:'false',     req:false, desc:'Primary: Figma Frame 64 muted (#f3c0c0). Others: 40% opacity.' },
     { name:'fullWidth', type:'boolean',             def:'false',     req:false, desc:'width: 100% — matches Figma\'s full-width form buttons.' },
     { name:'className', type:'string',              def:'""',        req:false, desc:'Appended to root class list for local overrides.' },
     { name:'...rest',   type:'ButtonHTMLAttributes',def:'—',         req:false, desc:'All native <button> attributes (onClick, type, form, ref…).' },
   ];
 
   return (
-    <Section id="api" num="08" title="Props API"
-      desc="Full TypeScript interface. Import types from 'src/components/Button'.">
+    <Section id="api" num="09" title="Props API"
+      desc="Full TypeScript interface. Import types from 'src/components/Button'. Ref-forwarded to <button>.">
       <div className="bsc-table-wrap">
         <table className="bsc-table">
           <thead>
@@ -472,36 +599,58 @@ function PropsAPI() {
           </tbody>
         </table>
       </div>
+
+      <div className="bsc-subsection" style={{ marginTop: 16 }}>
+        <span className="bsc-sublabel">Validation rules &amp; constraints</span>
+        <div className="bsc-spec-list">
+          {[
+            { rule: 'iconOnly + no aria-label', severity: 'error',   detail: 'Button has no accessible name — screen readers will announce nothing.' },
+            { rule: 'variant="link" + size',    severity: 'warning', detail: 'Link variant ignores size — height is auto, not the fixed tier.' },
+            { rule: 'loading + rightIcon',      severity: 'info',    detail: 'rightIcon remains visible during loading. Suppress explicitly if undesired.' },
+            { rule: 'glass on white bg',        severity: 'warning', detail: 'backdrop-filter blur has no effect without a translucent surface below.' },
+            { rule: 'variant="link" as href',   severity: 'info',    detail: 'Button does not render <a>. Wrap in react-router-dom <Link> for navigation.' },
+          ].map(r => (
+            <div key={r.rule} className="bsc-spec-row" style={{ gap: 10 }}>
+              <span className="bsc-mono" style={{ color: r.severity === 'error' ? '#f95757' : r.severity === 'warning' ? '#ff7c2b' : '#7eb5d7', minWidth: 220 }}>{r.rule}</span>
+              <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{r.detail}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </Section>
   );
 }
 
-// ── 09 — Code Snippets ─────────────────────────────────────────────────────
+// ── 10 — Code Snippets ─────────────────────────────────────────────────────
 
 function Snippets() {
   const examples = [
-    { label: 'Default — exact Figma button',
+    { label: 'Default — exact Figma Post Story button',
       code: `<Button>Post Story</Button>` },
-    { label: 'Submit Anonymously (full-width XL, matches Figma exactly)',
+    { label: 'Submit Anonymously (full-width XL, matches Figma canvas)',
       code: `<Button size="xl" fullWidth>\n  Submit Anonymously\n</Button>` },
-    { label: 'Secondary teal — Explore button style',
+    { label: 'Secondary teal — Figma Explore card button',
       code: `<Button variant="secondary">Explore</Button>` },
+    { label: 'Glass — Figma CONTACT button style',
+      code: `{/* Wrap in a dark/translucent surface for blur effect */}\n<Button variant="glass" shape="pill">CONTACT</Button>` },
     { label: 'With icon — left',
       code: `<Button leftIcon={<SendIcon />}>Post Story</Button>` },
-    { label: 'Destructive action with confirm',
+    { label: 'Destructive action',
       code: `<Button variant="destructive" leftIcon={<TrashIcon />}>\n  Delete Entry\n</Button>` },
-    { label: 'Loading state (on async submit)',
+    { label: 'Loading state (async submit)',
       code: `const [submitting, setSubmitting] = useState(false);\n\n<Button loading={submitting} onClick={handleSubmit}>\n  Post Story\n</Button>` },
     { label: 'Icon only — needs aria-label',
       code: `<Button iconOnly variant="ghost" aria-label="Close">\n  <XIcon />\n</Button>` },
-    { label: 'Full-width pill (matches original Figma rounded style)',
+    { label: 'Full-width pill',
       code: `<Button size="xl" shape="pill" fullWidth>\n  Submit Anonymously\n</Button>` },
-    { label: 'Link variant — inline',
+    { label: 'Link variant — inline action',
       code: `<Button variant="link">\n  View all resources →\n</Button>` },
+    { label: 'Ref forwarding',
+      code: `const btnRef = useRef<HTMLButtonElement>(null);\n<Button ref={btnRef}>Focused button</Button>` },
   ];
 
   return (
-    <Section id="snippets" num="09" title="Copy-Ready Snippets"
+    <Section id="snippets" num="10" title="Copy-Ready Snippets"
       desc="Common usage patterns. Import: import { Button } from '../components/Button'">
       <div className="bsc-snippets">
         {examples.map(ex => (
@@ -527,6 +676,7 @@ export default function ButtonShowcase() {
         <SizesSection />
         <StatesSection />
         <IconsSection />
+        <ThemeSection />
         <Playground />
         <PropsAPI />
         <Snippets />
