@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <script>
-      const path = window.location.pathname.replace('/mydesignsystem', '');
-      sessionStorage.setItem('redirect', path);
+      sessionStorage.setItem('redirect', window.location.pathname);
       window.location.replace('/mydesignsystem/');
     </script>
   </head>
