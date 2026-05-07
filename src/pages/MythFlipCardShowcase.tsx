@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { } from 'react';
 import './MythFlipCardShowcase.css';
 import { MythFlipCard } from '../components/MythFlipCard';
 import type { MythTruth } from '../components/MythFlipCard';
@@ -159,7 +159,7 @@ function LiveDemo() {
         </div>
         <div className="mfs-demo-block">
           <span className="mfs-sublabel">Full dataset (6 cards)</span>
-          <MythFlipCard />
+          <MythFlipCard data={singleEntry} />
         </div>
       </div>
     </Section>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './ButtonShowcase.css';
 import { Button } from '../components/Button';
 import type { ButtonVariant, ButtonSize, ButtonShape } from '../components/Button';
-import { colors, typography, borderRadius, animation } from '../styles/design-tokens';
+import { colors, typography, animation } from '../styles/design-tokens';
 
 // ── Inline SVG icons ───────────────────────────────────────────────────────
 
