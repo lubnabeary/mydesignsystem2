@@ -1,0 +1,218 @@
+/* DropdownShowcase — inherits ButtonShowcase utility classes via shared prefix */
+
+.dsc {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #ffffff;
+  text-align: left;
+}
+
+.dsc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding: 56px 0 96px;
+}
+
+/* ── Sections ───────────────────────────────────────────────────────────────── */
+
+.dsc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.dsc-section-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dsc-section-num {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: ui-monospace, monospace;
+}
+
+.dsc-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 4px;
+}
+
+.dsc-section-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Utility ────────────────────────────────────────────────────────────────── */
+
+.dsc-mono {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+}
+
+.dsc-sublabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.dsc-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Demo rows ──────────────────────────────────────────────────────────────── */
+
+.dsc-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  min-height: 80px;
+}
+
+.dsc-demo-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dsc-demo-label span:first-child {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dsc-demo-label span:last-child {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: ui-monospace, monospace;
+}
+
+/* ── States grid ────────────────────────────────────────────────────────────── */
+
+.dsc-states {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.dsc-state-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.dsc-state-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dsc-state-sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: ui-monospace, monospace;
+}
+
+/* ── Props table ────────────────────────────────────────────────────────────── */
+
+.dsc-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dsc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dsc-table th {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+.dsc-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.dsc-table tr:last-child td { border-bottom: none; }
+.dsc-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+.dsc-table code {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #7eb5d7;
+}
+
+/* ── Code snippets ──────────────────────────────────────────────────────────── */
+
+.dsc-snippets {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dsc-snippet {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dsc-snippet-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dsc-code {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+  margin: 0;
+}

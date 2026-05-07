@@ -1,0 +1,61 @@
+/*
+  PaginationDot — ARISE Design System
+  ──────────────────────────────────────
+  Dot indicators for carousels and multi-step flows.
+  Active dot elongates to a teal pill.
+  Figma source: D3C-FINAL — Myth Card carousel bottom indicator.
+
+  Tokens used:
+    colors.accent.teal           → #31bbe1  (active dot)
+    borderRadius.pill            → 9999px
+    animation.duration.slow      → 200ms
+    animation.easing.default     → cubic-bezier(0.4, 0, 0.2, 1)
+*/
+
+/* ── Container ──────────────────────────────────────────────────────────────── */
+
+.pagination-dots {
+  display:     flex;
+  gap:         8px;
+  align-items: center;
+}
+
+/* ── Dot button wrapper ─────────────────────────────────────────────────────── */
+
+.pagination-dots__btn {
+  background:  none;
+  border:      none;
+  padding:     0;
+  cursor:      pointer;
+  display:     flex;
+  align-items: center;
+  outline:     none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pagination-dots__btn:focus-visible .pagination-dots__dot {
+  outline:        2px solid rgba(49, 187, 225, 0.8);
+  outline-offset: 2px;
+}
+
+/* ── Dot ────────────────────────────────────────────────────────────────────── */
+
+.pagination-dots__dot {
+  width:         10px;
+  height:        10px;
+  border-radius: 9999px;                            /* borderRadius.pill */
+  background:    rgba(255, 255, 255, 0.25);         /* inactive */
+  transition:    all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  display:       block;
+}
+
+/* Active dot — elongated teal pill */
+.pagination-dots__dot--active {
+  width:      24px;
+  background: #31bbe1;                              /* colors.accent.teal */
+}
+
+/* Hover on inactive dot */
+.pagination-dots__btn:hover .pagination-dots__dot:not(.pagination-dots__dot--active) {
+  background: rgba(255, 255, 255, 0.45);
+}

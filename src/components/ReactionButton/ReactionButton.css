@@ -1,0 +1,99 @@
+/*
+  ReactionButton — ARISE Design System
+  ──────────────────────────────────────
+  Heart reaction pill button with count — used on Student Experience cards.
+  Figma source: D3C-FINAL — Student Experiences card reaction row.
+
+  Tokens used:
+    borderRadius.pill            → 9999px
+    animation.duration.base      → 150ms
+    animation.easing.default     → cubic-bezier(0.4, 0, 0.2, 1)
+*/
+
+/* ── Pill button ────────────────────────────────────────────────────────────── */
+
+.reaction-btn {
+  display:      inline-flex;
+  align-items:  center;
+  gap:          8px;
+  height:       40px;
+  padding:      0 16px;
+  border-radius: 9999px;                            /* borderRadius.pill */
+  border:       1px solid rgba(255, 255, 255, 0.12);
+  background:   rgba(255, 255, 255, 0.06);
+  color:        rgba(255, 255, 255, 0.7);
+  font-family:  'Be Vietnam Pro', sans-serif;
+  cursor:       pointer;
+  user-select:  none;
+  outline:      none;
+  transition:   all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover — default state */
+.reaction-btn:not(.reaction-btn--active):not(:disabled):hover {
+  background:   rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.20);
+}
+
+/* Active / liked state */
+.reaction-btn--active {
+  background:   rgba(107, 79, 160, 0.35);
+  border-color: rgba(107, 79, 160, 0.6);
+  color:        #ffffff;
+}
+
+/* Hover — active state */
+.reaction-btn--active:not(:disabled):hover {
+  background: rgba(107, 79, 160, 0.5);
+}
+
+/* Disabled */
+.reaction-btn:disabled,
+.reaction-btn--disabled {
+  opacity:        0.4;
+  cursor:         not-allowed;
+  pointer-events: none;
+}
+
+/* Loading */
+.reaction-btn--loading {
+  cursor:         wait;
+  pointer-events: none;
+  opacity:        0.7;
+}
+
+/* Focus ring */
+.reaction-btn:focus-visible {
+  outline:        2px solid rgba(49, 187, 225, 0.8);
+  outline-offset: 2px;
+}
+
+/* ── Sub-elements ───────────────────────────────────────────────────────────── */
+
+.reaction-btn__heart {
+  font-size:   16px;
+  line-height: 1;
+  flex-shrink: 0;
+  display:     inline-flex;
+  align-items: center;
+}
+
+.reaction-btn__count {
+  font-size:   14px;
+  font-weight: 600;
+  line-height: 1;
+  min-width:   1ch;
+  text-align:  center;
+}
+
+/* Spin animation for loading state */
+.reaction-btn__spinner {
+  display:   inline-flex;
+  flex-shrink: 0;
+  animation: _reaction-spin 750ms linear infinite;
+}
+
+@keyframes _reaction-spin {
+  to { transform: rotate(360deg); }
+}

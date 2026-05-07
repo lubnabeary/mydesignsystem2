@@ -1,0 +1,98 @@
+/* ── Textarea ──────────────────────────────────────────────────────────────── */
+
+.textarea-root {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.textarea-root--full {
+  width: 100%;
+}
+
+/* ── Label ──────────────────────────────────────────────────────────────────── */
+
+.textarea-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 8px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* ── Textarea field ──────────────────────────────────────────────────────────── */
+
+.textarea-field {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.textarea-field::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.textarea-field:focus {
+  border-color: #31bbe1;
+  box-shadow: 0 0 0 2px rgba(49, 187, 225, 0.2);
+}
+
+/* ── Error state ─────────────────────────────────────────────────────────────── */
+
+.textarea-root--error .textarea-field {
+  border-color: #f95757;
+}
+
+.textarea-root--error .textarea-field:focus {
+  border-color: #f95757;
+  box-shadow: 0 0 0 2px rgba(249, 87, 87, 0.2);
+}
+
+/* ── Disabled state ──────────────────────────────────────────────────────────── */
+
+.textarea-root--disabled {
+  opacity: 0.4;
+}
+
+.textarea-root--disabled .textarea-field {
+  cursor: not-allowed;
+  resize: none;
+}
+
+.textarea-root--disabled .textarea-label {
+  cursor: not-allowed;
+}
+
+/* ── Hint ────────────────────────────────────────────────────────────────────── */
+
+.textarea-hint {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 6px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* ── Error message ───────────────────────────────────────────────────────────── */
+
+.textarea-error {
+  display: block;
+  font-size: 12px;
+  color: #f95757;
+  margin-top: 6px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}

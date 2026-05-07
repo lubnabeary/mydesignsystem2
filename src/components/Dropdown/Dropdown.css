@@ -1,0 +1,149 @@
+/*
+  Dropdown — ARISE Design System
+  ───────────────────────────────
+  Pill-shaped selector for year and topic filters.
+  Figma source: D3C-FINAL — Mood Tracker and Student Experiences filter bars.
+
+  Tokens used:
+    colors.background.secondary  → #1e1a2c  (trigger bg)
+    colors.accent.teal            → #31bbe1  (active state)
+    colors.brand.salmon           → #ff8e8e  (selected option)
+    borderRadius.pill             → 9999px
+    animation.duration.base       → 150ms
+    animation.easing.default      → cubic-bezier(0.4, 0, 0.2, 1)
+*/
+
+/* ── Wrapper ────────────────────────────────────────────────────────────────── */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* ── Trigger pill ───────────────────────────────────────────────────────────── */
+
+.dropdown__trigger {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             8px;
+  height:          36px;
+  padding:         0 16px;
+  background:      #1e1a2c;                        /* colors.background.secondary */
+  border:          1px solid rgba(255, 255, 255, 0.15);
+  border-radius:   9999px;                          /* borderRadius.pill */
+  color:           #ffffff;
+  font-family:     'Be Vietnam Pro', sans-serif;
+  font-size:       14px;
+  font-weight:     500;
+  cursor:          pointer;
+  white-space:     nowrap;
+  user-select:     none;
+  outline:         none;
+  transition:
+    background     150ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color   150ms cubic-bezier(0.4, 0, 0.2, 1),
+    color          150ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dropdown__trigger:focus-visible {
+  outline:        2px solid rgba(49, 187, 225, 0.8);
+  outline-offset: 2px;
+}
+
+/* Active pill — has a selected value */
+.dropdown__trigger--active {
+  background:    rgba(49, 187, 225, 0.15);          /* colors.accent.teal @ 15% */
+  border-color:  rgba(49, 187, 225, 0.5);
+  color:         #31bbe1;                            /* colors.accent.teal */
+}
+
+/* Hover states */
+.dropdown__trigger:not(:disabled):not(.dropdown__trigger--active):hover {
+  background:   rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.dropdown__trigger--active:not(:disabled):hover {
+  background: rgba(49, 187, 225, 0.22);
+}
+
+/* Disabled */
+.dropdown__trigger:disabled,
+.dropdown--disabled .dropdown__trigger {
+  opacity:        0.4;
+  cursor:         not-allowed;
+  pointer-events: none;
+}
+
+/* ── Chevron icon ───────────────────────────────────────────────────────────── */
+
+.dropdown__chevron {
+  display:    inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 2px;
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dropdown__chevron--open {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown card ──────────────────────────────────────────────────────────── */
+
+.dropdown__menu {
+  position:         absolute;
+  top:              calc(100% + 6px);
+  left:             0;
+  z-index:          100;
+  min-width:        160px;
+  background:       #252035;
+  border:           1px solid rgba(255, 255, 255, 0.12);
+  border-radius:    12px;
+  padding:          6px 0;
+  box-shadow:       0px 8px 24px rgba(0, 0, 0, 0.35);
+  animation:        _dd-enter 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes _dd-enter {
+  from {
+    opacity:   0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity:   1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Options ────────────────────────────────────────────────────────────────── */
+
+.dropdown__option {
+  display:     flex;
+  align-items: center;
+  padding:     10px 16px;
+  font-size:   14px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 400;
+  color:       rgba(255, 255, 255, 0.75);
+  cursor:      pointer;
+  transition:  background 100ms ease;
+}
+
+.dropdown__option:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color:      #ffffff;
+}
+
+/* Selected option */
+.dropdown__option--selected {
+  background: rgba(255, 142, 142, 0.20);            /* colors.brand.salmon @ 20% */
+  color:      #ff8e8e;                               /* colors.brand.salmon */
+  font-weight: 600;
+}
+
+.dropdown__option--selected:hover {
+  background: rgba(255, 142, 142, 0.28);
+}

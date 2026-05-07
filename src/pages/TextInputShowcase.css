@@ -1,0 +1,224 @@
+/* TextInputShowcase */
+
+.tisc {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #ffffff;
+  text-align: left;
+}
+
+.tisc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding: 56px 0 96px;
+}
+
+/* ── Sections ───────────────────────────────────────────────────────────────── */
+
+.tisc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.tisc-section-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tisc-section-num {
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: ui-monospace, monospace;
+}
+
+.tisc-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 4px;
+}
+
+.tisc-section-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Utility ────────────────────────────────────────────────────────────────── */
+
+.tisc-mono {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+}
+
+.tisc-sublabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.tisc-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── States grid ────────────────────────────────────────────────────────────── */
+
+.tisc-states {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.tisc-state-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.tisc-state-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.tisc-state-sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: ui-monospace, monospace;
+}
+
+/* ── Figma spec row ─────────────────────────────────────────────────────────── */
+
+.tisc-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.tisc-spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+}
+
+.tisc-spec-key {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.tisc-spec-val {
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+  color: #7eb5d7;
+  white-space: nowrap;
+}
+
+/* ── Props table ────────────────────────────────────────────────────────────── */
+
+.tisc-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tisc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tisc-table th {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+.tisc-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.tisc-table tr:last-child td { border-bottom: none; }
+.tisc-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+.tisc-table code {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #7eb5d7;
+}
+
+/* ── Snippets ───────────────────────────────────────────────────────────────── */
+
+.tisc-snippets {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tisc-snippet {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tisc-snippet-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.tisc-code {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+  margin: 0;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 800px) {
+  .tisc-states { grid-template-columns: 1fr; }
+  .tisc-spec-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,95 @@
+/* ── TextInput ─────────────────────────────────────────────────────────────── */
+
+.text-input-root {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.text-input-root--full {
+  width: 100%;
+}
+
+/* ── Label ──────────────────────────────────────────────────────────────────── */
+
+.text-input-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 8px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* ── Input field ─────────────────────────────────────────────────────────────── */
+
+.text-input-field {
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0 14px;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  outline: none;
+  transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.text-input-field::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.text-input-field:focus {
+  border-color: #31bbe1;
+  box-shadow: 0 0 0 2px rgba(49, 187, 225, 0.2);
+}
+
+/* ── Error state ─────────────────────────────────────────────────────────────── */
+
+.text-input-root--error .text-input-field {
+  border-color: #f95757;
+}
+
+.text-input-root--error .text-input-field:focus {
+  border-color: #f95757;
+  box-shadow: 0 0 0 2px rgba(249, 87, 87, 0.2);
+}
+
+/* ── Disabled state ──────────────────────────────────────────────────────────── */
+
+.text-input-root--disabled {
+  opacity: 0.4;
+}
+
+.text-input-root--disabled .text-input-field {
+  cursor: not-allowed;
+}
+
+.text-input-root--disabled .text-input-label {
+  cursor: not-allowed;
+}
+
+/* ── Hint ────────────────────────────────────────────────────────────────────── */
+
+.text-input-hint {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 6px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* ── Error message ───────────────────────────────────────────────────────────── */
+
+.text-input-error {
+  display: block;
+  font-size: 12px;
+  color: #f95757;
+  margin-top: 6px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}

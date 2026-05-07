@@ -1,0 +1,76 @@
+/*
+  MoodRatingTile — ARISE Design System
+  ──────────────────────────────────────
+  Square numbered tiles (1–10) for mood input forms.
+  Figma source: D3C-FINAL — Mood Tracker rating row.
+
+  Tokens used:
+    colors.background.primary    → #1a1229  (default bg)
+    animation.duration.base      → 150ms
+    animation.easing.default     → cubic-bezier(0.4, 0, 0.2, 1)
+    borderRadius.md              → 8px (tile = 10px, close enough)
+*/
+
+/* ── Single tile ────────────────────────────────────────────────────────────── */
+
+.mood-tile {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  width:           52px;
+  height:          52px;
+  border-radius:   10px;
+  border:          1px solid rgba(255, 255, 255, 0.12);
+  background:      #1a1229;                          /* colors.background.primary */
+  color:           rgba(255, 255, 255, 0.7);
+  font-family:     'Be Vietnam Pro', sans-serif;
+  font-size:       18px;
+  font-weight:     700;
+  cursor:          pointer;
+  user-select:     none;
+  outline:         none;
+  transition:
+    background    150ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color  150ms cubic-bezier(0.4, 0, 0.2, 1),
+    color         150ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+/* Hover — not selected */
+.mood-tile:not(.mood-tile--selected):not(.mood-tile--disabled):hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Focus */
+.mood-tile:focus-visible {
+  outline:        2px solid rgba(49, 187, 225, 0.8);
+  outline-offset: 2px;
+}
+
+/* Selected state — purple highlight */
+.mood-tile--selected {
+  background:   rgba(107, 79, 160, 0.6);
+  border-color: rgba(107, 79, 160, 0.8);
+  color:        #ffffff;
+}
+
+.mood-tile--selected:hover {
+  background: rgba(107, 79, 160, 0.72);
+}
+
+/* Disabled */
+.mood-tile--disabled {
+  opacity:        0.4;
+  cursor:         not-allowed;
+  pointer-events: none;
+}
+
+/* ── Group container ────────────────────────────────────────────────────────── */
+
+.mood-rating-group {
+  display:   flex;
+  gap:       8px;
+  flex-wrap: wrap;
+  align-items: center;
+}

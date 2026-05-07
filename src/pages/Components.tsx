@@ -1,9 +1,17 @@
 import { useState } from 'react';
 import './Components.css';
-import ButtonShowcase       from './ButtonShowcase';
-import NavbarShowcase       from './NavbarShowcase';
-import MythFlipCardShowcase from './MythFlipCardShowcase';
-import FeatureCardShowcase  from './FeatureCardShowcase';
+import ButtonShowcase          from './ButtonShowcase';
+import NavbarShowcase          from './NavbarShowcase';
+import MythFlipCardShowcase    from './MythFlipCardShowcase';
+import FeatureCardShowcase     from './FeatureCardShowcase';
+import DropdownShowcase        from './DropdownShowcase';
+import MoodRatingTileShowcase  from './MoodRatingTileShowcase';
+import PaginationDotShowcase   from './PaginationDotShowcase';
+import ReactionButtonShowcase  from './ReactionButtonShowcase';
+import TextInputShowcase       from './TextInputShowcase';
+import TextareaShowcase        from './TextareaShowcase';
+import RadioButtonShowcase     from './RadioButtonShowcase';
+import CheckboxShowcase        from './CheckboxShowcase';
 
 // ── Tab registry — add new component tabs here ─────────────────────────────
 
@@ -39,6 +47,70 @@ const TABS = [
     desc:  'Hoverable section card from ARISE Figma node 585:4764. Three variants (Awareness, Mood Tracker, Student Experiences) with icon, title, subtitle, and Explore button.',
     file:  'src/components/FeatureCard/FeatureCard.tsx',
     component: FeatureCardShowcase,
+  },
+  {
+    id:    'dropdown',
+    label: 'Dropdown',
+    title: 'Dropdown',
+    desc:  'Year and Topic selectors with open/close states and option highlighting. Extracted from ARISE Mood Tracker and Student Experiences filters.',
+    file:  'src/components/Dropdown/Dropdown.tsx',
+    component: DropdownShowcase,
+  },
+  {
+    id:    'mood-rating-tile',
+    label: 'Mood Rating',
+    title: 'Mood Rating Tile',
+    desc:  'Numbered square tiles (1–10) for mood input. Three states: default, selected, hover. Used in the ARISE Mood Tracker form.',
+    file:  'src/components/MoodRatingTile/MoodRatingTile.tsx',
+    component: MoodRatingTileShowcase,
+  },
+  {
+    id:    'pagination-dot',
+    label: 'Pagination',
+    title: 'Pagination Dot',
+    desc:  'Dot indicators for carousels and multi-step flows. Inactive grey, active teal elongated pill. From ARISE myth card carousel.',
+    file:  'src/components/PaginationDot/PaginationDot.tsx',
+    component: PaginationDotShowcase,
+  },
+  {
+    id:    'reaction-button',
+    label: 'Reaction',
+    title: 'Reaction Button',
+    desc:  'Heart reaction pill button with count. Default and active (liked) states. From ARISE Student Experiences cards.',
+    file:  'src/components/ReactionButton/ReactionButton.tsx',
+    component: ReactionButtonShowcase,
+  },
+  {
+    id:    'text-input',
+    label: 'Text Input',
+    title: 'Text Input',
+    desc:  'Single-line text field with label, hint, and error states. From the ARISE Student Experiences "Give your story a title" field.',
+    file:  'src/components/TextInput/TextInput.tsx',
+    component: TextInputShowcase,
+  },
+  {
+    id:    'textarea',
+    label: 'Textarea',
+    title: 'Textarea',
+    desc:  'Multi-line text input with label, hint, and error states. From the ARISE Student Experiences "Share your experience" field.',
+    file:  'src/components/Textarea/Textarea.tsx',
+    component: TextareaShowcase,
+  },
+  {
+    id:    'radio-button',
+    label: 'Radio Button',
+    title: 'Radio Button',
+    desc:  'Single-select radio group with teal active state. From the ARISE Student Experiences credit preference selector.',
+    file:  'src/components/RadioButton/RadioButton.tsx',
+    component: RadioButtonShowcase,
+  },
+  {
+    id:    'checkbox',
+    label: 'Checkbox',
+    title: 'Checkbox',
+    desc:  'Multi-select checkbox with indeterminate state support and grid layout. From the ARISE Student Experiences topic category selector.',
+    file:  'src/components/Checkbox/Checkbox.tsx',
+    component: CheckboxShowcase,
   },
 ] as const;
 
